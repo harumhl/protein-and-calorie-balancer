@@ -120,7 +120,7 @@ function App() {
     <div className="App">
       <h1>Protein And Calorie Balancer</h1>
       <div>
-        <h3>One-Meal Goal</h3>
+        <h2>One-Meal Goal</h2>
         Minimum protein:
         <input
           type="number"
@@ -148,11 +148,11 @@ function App() {
           }
         />
         kcal
-        <h5>Derive Per-Meal protein and calorie goal from Daily Goal</h5>
+        <h6>Derive Per-Meal protein and calorie goal from Daily Goal</h6>
         Not Available Yet
       </div>
       <div>
-        <h3>Requirements</h3>
+        <h2>Requirements</h2>
         <header>What ingredients can be included in your diet?</header>
         "Meats" (aka protein source):
         <Select
@@ -180,8 +180,8 @@ function App() {
         </a>
       </div>
       <div>
-        <h3>Optional Requirements</h3>
-        <header>Any requirement on how much you can or you have to eat?</header>
+        <h2>Optional Requirements</h2>
+        <header>Any requirement on how much you can eat or how much you have to eat?</header>
         {[...selectedMeatOptions, ...selectedVeggieOptions].map((option) => {
           return (
             <div key={option.value}>
@@ -250,7 +250,7 @@ function App() {
         })}
       </div>
       <div>
-        <h3>Run and View Results</h3>
+        <h2>Run and View Results</h2>
         {isRunning ? (
           <FontAwesomeIcon icon={faSpinner} spin={true} />
         ) : (
