@@ -178,7 +178,9 @@ function App() {
           <button
             onClick={async () => {
               if (!minProtein || !maxCalorie) {
-                toast.error("Please enter a minimum protein and maximum calorie");
+                toast.error(
+                  "Please enter a minimum protein and maximum calorie"
+                );
                 return;
               }
               if (!selectedMeatOptions || !selectedVeggieOptions) {
@@ -188,7 +190,12 @@ function App() {
               setIsRunning(true);
               let result;
               try {
-                result = await optimize(minProtein, maxCalorie, selectedMeatOptions, selectedVeggieOptions);
+                result = await optimize(
+                  minProtein,
+                  maxCalorie,
+                  selectedMeatOptions,
+                  selectedVeggieOptions
+                );
               } catch (e) {
                 console.error(e);
                 return;
@@ -201,7 +208,44 @@ function App() {
             Run
           </button>
         )}
-        {runResult && "Run Result: TODO"}
+        {runResult && (
+          <div>
+            Run Result: <br />
+            <ul className="result-list">
+              <li>feasible?: {runResult.feasible ? "yes" : "no"}</li>
+              <li>Total Calorie: {Math.round(runResult.result)}kcal</li>
+              <li>
+                Total Protein:{" "}
+                {Math.round(
+                  [...meatOptions, ...veggieOptions].reduce(
+                    (acc, currOption) => {
+                      return runResult[currOption.value]
+                        ? acc +
+                            (currOption.proteinPer100g / 100.0) *
+                              runResult[currOption.value]
+                        : acc;
+                    },
+                    0
+                  )
+                )}
+                g
+              </li>
+              {[...meatOptions, ...veggieOptions].map(
+                (option) => {
+                  // Display how much each option to consume
+                  return (
+                    runResult[option.value] && (
+                      <li key={option.value}>
+                        {option.label}: {Math.round(runResult[option.value])}g
+                      </li>
+                    )
+                  );
+                }
+              )}
+            </ul>
+            <br />
+          </div>
+        )}
       </div>
       <ToastContainer theme="colored" />
     </div>
