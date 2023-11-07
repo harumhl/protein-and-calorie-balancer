@@ -1,6 +1,8 @@
 # protein-and-calorie-balancer
 
-Created using Create React App. There is no backend and everything happens within the app
+Created using Create React App. There is no backend and everything happens within the app.
+
+Live at https://protein-and-calorie-balancer.firebaseapp.com/
 
 # Development
 

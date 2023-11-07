@@ -139,6 +139,7 @@ function App() {
   const [selectedVeggieOptions, setSelectedVeggieOptions] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [runResult, setRunResult] = useState(null);
+  const [learnMore, setLearnMore] = useState(false);
 
   function handleExportImport(type, toBeImported) {
     let result;
@@ -428,6 +429,24 @@ function App() {
           style={{ width: "96%" }}
           onChange={(e) => handleExportImport("import", e.target.value)}
         ></input>
+      </div>
+      <div>
+        This uses Linear Programming to solve the problem.
+        <button onClick={() => setLearnMore(!learnMore)}>Learn more</button>
+        {learnMore && (
+          <>
+            <br />
+            Basically, a linear program is a program where you try to find the minimum (or maximum) of multiple linear functions, subject to some constraints.
+            <br />
+            In below chart, the intersection of two lines would be considered the optimal solution.
+            <br />
+            <a href="https://brilliant.org/wiki/linear-programming/">
+              Good resources
+            </a>
+            <br />
+            <img src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/MyatSFk0x6-inequality-constraints.png?width=4000" style={{width: '50%'}}></img>
+          </>
+        )}
       </div>
       <ToastContainer theme="colored" />
     </div>
