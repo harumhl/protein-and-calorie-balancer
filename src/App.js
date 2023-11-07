@@ -1,6 +1,12 @@
 import { useState } from "react";
-import "./App.css";
 import Select from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import "./App.css";
+import optimize from "./optimizer";
 
 const meatOptions = [
   {
@@ -108,11 +114,13 @@ function App() {
   const [maxCalorie, setMaxCalorie] = useState(600);
   const [selectedMeatOptions, setSelectedMeatOptions] = useState(null);
   const [selectedVeggieOptions, setSelectedVeggieOptions] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
+  const [runResult, setRunResult] = useState(null);
   return (
     <div className="App">
       <h1>Protein And Calorie Balancer</h1>
       <div>
-        <h3>Goal</h3>
+        <h3>One-Meal Goal</h3>
         Minimum protein:
         <input
           type="number"
@@ -164,8 +172,31 @@ function App() {
       </div>
       <div>
         <h3>Run and View Results</h3>
-        <button>Run</button>
+        {isRunning ? (
+          <FontAwesomeIcon icon={faSpinner} spin={true} />
+        ) : (
+          <button
+            onClick={async () => {
+              if (!minProtein || !maxCalorie) {
+                toast.error("Please enter a minimum protein and maximum calorie");
+                return;
+              }
+              if (!selectedMeatOptions || !selectedVeggieOptions) {
+                toast.error("Please select at least one meat and one veggie");
+                return;
+              }
+              setIsRunning(true);
+              const result = await optimize(minProtein, maxCalorie, selectedMeatOptions, selectedVeggieOptions);
+              setRunResult(result);
+              setIsRunning(false);
+            }}
+          >
+            Run
+          </button>
+        )}
+        {runResult && "Run Result: TODO"}
       </div>
+      <ToastContainer theme="colored" />
     </div>
   );
 }
