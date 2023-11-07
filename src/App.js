@@ -411,27 +411,21 @@ function App() {
       <div>
         <h2>Export/Import</h2>
         Export inputs:
-        <input
-          disabled
-          type="text"
-          style={{ width: "95%" }}
-          id="export-input"
-          value={handleExportImport("export")}
-        ></input>
         <FontAwesomeIcon
           icon={faCopy}
           size="2x"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            const content = document.getElementById("export-input").value;
+            const content = handleExportImport("export");
             navigator.clipboard.writeText(content);
           }}
+          title="Click to copy"
         />
         <br />
         Import inputs:
         <input
           type="text"
-          style={{ width: "100%" }}
+          style={{ width: "96%" }}
           onChange={(e) => handleExportImport("import", e.target.value)}
         ></input>
       </div>
