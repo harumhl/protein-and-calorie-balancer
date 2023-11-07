@@ -125,7 +125,13 @@ function App() {
         <input
           type="number"
           value={minProtein}
-          onChange={(e) => setMinProtein(e.target.value)}
+          onChange={(e) =>
+            setMinProtein(
+              typeof e.target.value === "string"
+                ? parseInt(e.target.value)
+                : e.target.value
+            )
+          }
         />
         g
         <br />
@@ -133,7 +139,13 @@ function App() {
         <input
           type="number"
           value={maxCalorie}
-          onChange={(e) => setMaxCalorie(e.target.value)}
+          onChange={(e) =>
+            setMaxCalorie(
+              typeof e.target.value === "string"
+                ? parseInt(e.target.value)
+                : e.target.value
+            )
+          }
         />
         kcal
         <h5>Derive Per-Meal protein and calorie goal from Daily Goal</h5>
@@ -211,38 +223,45 @@ function App() {
         {runResult && (
           <div>
             Run Result: <br />
-            <ul className="result-list">
-              <li>feasible?: {runResult.feasible ? "yes" : "no"}</li>
-              <li>Total Calorie: {Math.round(runResult.result)}kcal</li>
-              <li>
-                Total Protein:{" "}
-                {Math.round(
-                  [...meatOptions, ...veggieOptions].reduce(
-                    (acc, currOption) => {
-                      return runResult[currOption.value]
-                        ? acc +
-                            (currOption.proteinPer100g / 100.0) *
-                              runResult[currOption.value]
-                        : acc;
-                    },
-                    0
-                  )
-                )}
-                g
-              </li>
-              {[...meatOptions, ...veggieOptions].map(
-                (option) => {
-                  // Display how much each option to consume
-                  return (
-                    runResult[option.value] && (
-                      <li key={option.value}>
-                        {option.label}: {Math.round(runResult[option.value])}g
-                      </li>
-                    )
-                  );
-                }
-              )}
-            </ul>
+            {runResult.feasible ? (
+              <>
+                <ul className="result-list">
+                  <li>Total Calorie: {Math.round(runResult.result)}kcal</li>
+                  <li>
+                    Total Protein:{" "}
+                    {Math.round(
+                      [...meatOptions, ...veggieOptions].reduce(
+                        (acc, currOption) => {
+                          return runResult[currOption.value]
+                            ? acc +
+                                (currOption.proteinPer100g / 100.0) *
+                                  runResult[currOption.value]
+                            : acc;
+                        },
+                        0
+                      )
+                    )}
+                    g
+                  </li>
+                </ul>
+                <ul className="result-list">
+                  {[...meatOptions, ...veggieOptions].map((option) => {
+                    // Display how much each option to consume
+                    return (
+                      runResult[option.value] && (
+                        <li key={option.value}>
+                          {option.label}: {Math.round(runResult[option.value])}g
+                        </li>
+                      )
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <ul className="result-list">
+                <li>Not Feasible</li>
+              </ul>
+            )}
             <br />
           </div>
         )}

@@ -15,6 +15,7 @@ async function optimize(
     };
   });
   const model = {
+    // TODO try multi-objective optimization
     optimize: "calorie",
     opType: "min",
     constraints: {
@@ -27,13 +28,17 @@ async function optimize(
           return {
             ...acc,
             [currOption.value]: {
-              protein: currOption.proteinPer100g / 100.0,
-              calorie: currOption.caloriePer100g / 100.0,
+              protein: currOption.proteinPer100g / 100,
+              calorie: currOption.caloriePer100g / 100,
+              [currOption.value]: 1,
             },
           };
         },
         {}
       ),
+    },
+    options: {
+      tolerance: 0.05,
     },
   };
 
