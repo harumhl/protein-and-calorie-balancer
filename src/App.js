@@ -153,11 +153,7 @@ function App() {
       </div>
       <div>
         <h3>Requirements</h3>
-        source (consumed on Nov 2023):{" "}
-        <a href="https://www.nutritionvalue.org/">
-          https://www.nutritionvalue.org/
-        </a>
-        <br />
+        <header>What ingredients can be included in your diet?</header>
         "Meats" (aka protein source):
         <Select
           className="requirement-dropdown"
@@ -177,9 +173,15 @@ function App() {
           isMulti={true}
           isSearchable={true}
         />
+        <br />
+        source (consumed on Nov 2023):{" "}
+        <a href="https://www.nutritionvalue.org/">
+          https://www.nutritionvalue.org/
+        </a>
       </div>
       <div>
         <h3>Optional Requirements</h3>
+        <header>Any requirement on how much you can or you have to eat?</header>
         {[...selectedMeatOptions, ...selectedVeggieOptions].map((option) => {
           return (
             <div key={option.value}>
@@ -187,12 +189,13 @@ function App() {
               <Select
                 className="requirement-dropdown-narrow"
                 onChange={(maxMinSelection) => {
-                  const [selectedOptions, func] = meatOptions.some((o) => o.value === option.value)
+                  const [selectedOptions, func] = meatOptions.some(
+                    (o) => o.value === option.value
+                  )
                     ? [selectedMeatOptions, setSelectedMeatOptions]
                     : [selectedVeggieOptions, setSelectedVeggieOptions];
                   func(
                     selectedOptions.map((o) => {
-                      console.log(o, option, maxMinSelection)
                       return o.value !== option.value
                         ? o
                         : {
@@ -221,7 +224,9 @@ function App() {
                 type="number"
                 value={option.constraintValue || 0}
                 onChange={(e) => {
-                  const [selectedOptions, func] = meatOptions.some((o) => o.value === option.value)
+                  const [selectedOptions, func] = meatOptions.some(
+                    (o) => o.value === option.value
+                  )
                     ? [selectedMeatOptions, setSelectedMeatOptions]
                     : [selectedVeggieOptions, setSelectedVeggieOptions];
                   func(
@@ -230,7 +235,10 @@ function App() {
                         ? o
                         : {
                             ...o,
-                            constraintValue: e.target.value,
+                            constraintValue:
+                              typeof e.target.value === "string"
+                                ? parseInt(e.target.value)
+                                : e.target.value,
                           };
                     })
                   );

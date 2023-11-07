@@ -21,6 +21,20 @@ async function optimize(
     constraints: {
       protein: { min: minProtein },
       calorie: { max: maxCalorie },
+      ...[...selectedMeatOptions, ...selectedVeggieOptions].reduce(
+        (acc, currOption) => {
+          if (currOption.constraintType && currOption.constraintValue) {
+            return {
+              ...acc,
+              [currOption.value]: {
+                [currOption.constraintType]: currOption.constraintValue,
+              },
+            };
+          }
+          return acc;
+        },
+        {}
+      ),
     },
     variables: {
       ...[...selectedMeatOptions, ...selectedVeggieOptions].reduce(
