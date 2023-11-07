@@ -112,8 +112,8 @@ const veggieOptions = [
 function App() {
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
-  const [selectedMeatOptions, setSelectedMeatOptions] = useState(null);
-  const [selectedVeggieOptions, setSelectedVeggieOptions] = useState(null);
+  const [selectedMeatOptions, setSelectedMeatOptions] = useState([]);
+  const [selectedVeggieOptions, setSelectedVeggieOptions] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [runResult, setRunResult] = useState(null);
   return (
@@ -180,7 +180,66 @@ function App() {
       </div>
       <div>
         <h3>Optional Requirements</h3>
-        Not Available Yet
+        {[...selectedMeatOptions, ...selectedVeggieOptions].map((option) => {
+          return (
+            <div key={option.value}>
+              {option.label}{" "}
+              <Select
+                className="requirement-dropdown-narrow"
+                onChange={(maxMinSelection) => {
+                  const [selectedOptions, func] = meatOptions.some((o) => o.value === option.value)
+                    ? [selectedMeatOptions, setSelectedMeatOptions]
+                    : [selectedVeggieOptions, setSelectedVeggieOptions];
+                  func(
+                    selectedOptions.map((o) => {
+                      console.log(o, option, maxMinSelection)
+                      return o.value !== option.value
+                        ? o
+                        : {
+                            ...o,
+                            constraintType: maxMinSelection.value,
+                          };
+                    })
+                  );
+                }}
+                options={[
+                  {
+                    value: "max",
+                    label: "Maximum",
+                  },
+                  {
+                    value: "equal",
+                    label: "Exactly",
+                  },
+                  {
+                    value: "min",
+                    label: "Minimum",
+                  },
+                ]}
+              />
+              <input
+                type="number"
+                value={option.constraintValue || 0}
+                onChange={(e) => {
+                  const [selectedOptions, func] = meatOptions.some((o) => o.value === option.value)
+                    ? [selectedMeatOptions, setSelectedMeatOptions]
+                    : [selectedVeggieOptions, setSelectedVeggieOptions];
+                  func(
+                    selectedOptions.map((o) => {
+                      return o.value !== option.value
+                        ? o
+                        : {
+                            ...o,
+                            constraintValue: e.target.value,
+                          };
+                    })
+                  );
+                }}
+              ></input>
+              g
+            </div>
+          );
+        })}
       </div>
       <div>
         <h3>Run and View Results</h3>
@@ -249,7 +308,7 @@ function App() {
                     // Display how much each option to consume
                     return (
                       runResult[option.value] && (
-                        <li key={option.value}>
+                        <li key={`result-${option.value}`}>
                           {option.label}: {Math.round(runResult[option.value])}g
                         </li>
                       )

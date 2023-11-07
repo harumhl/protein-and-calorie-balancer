@@ -42,6 +42,11 @@
   display: inline-block;
 }
 
+.requirement-dropdown-narrow {
+  width: 100px;
+  display: inline-block;
+}
+
 .result-list {
   display: inline-block;
   text-align: left;
