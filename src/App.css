@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.requirement-dropdown {
+  width: 300px;
+  display: inline-block;
+}
