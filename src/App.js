@@ -186,9 +186,16 @@ function App() {
                 return;
               }
               setIsRunning(true);
-              const result = await optimize(minProtein, maxCalorie, selectedMeatOptions, selectedVeggieOptions);
+              let result;
+              try {
+                result = await optimize(minProtein, maxCalorie, selectedMeatOptions, selectedVeggieOptions);
+              } catch (e) {
+                console.error(e);
+                return;
+              } finally {
+                setIsRunning(false);
+              }
               setRunResult(result);
-              setIsRunning(false);
             }}
           >
             Run
