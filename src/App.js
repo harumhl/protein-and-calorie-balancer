@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -65,6 +65,14 @@ const meatOptions = [
     proteinPer100g: 11,
     caloriePer100g: 52,
   },
+  {
+    value: "tofu",
+    label: "Tofu",
+    source:
+      "https://www.nutritionvalue.org/Tofu%2C_prepared_with_calcium_sulfate%2C_regular%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 8.1,
+    caloriePer100g: 76,
+  },
 ];
 const veggieOptions = [
   {
@@ -109,6 +117,21 @@ const veggieOptions = [
   },
 ];
 
+const optionalRequirementOptions = [
+  {
+    value: "max",
+    label: "Maximum",
+  },
+  {
+    value: "equal",
+    label: "Exactly",
+  },
+  {
+    value: "min",
+    label: "Minimum",
+  },
+];
+
 function App() {
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
@@ -116,6 +139,68 @@ function App() {
   const [selectedVeggieOptions, setSelectedVeggieOptions] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [runResult, setRunResult] = useState(null);
+
+  function handleExportImport(type, toBeImported) {
+    let result;
+    switch (type) {
+      case "export":
+        result =
+          `minProtein:${minProtein};` +
+          `maxCalorie:${maxCalorie};` +
+          `requirements:${[
+            ...selectedMeatOptions,
+            ...selectedVeggieOptions,
+          ].map((o) =>
+            o.constraintType && o.constraintValue
+              ? `${o.value}'${o.constraintType}'${o.constraintValue}`
+              : o.value
+          )};`;
+        break;
+      case "import":
+        function stringToNumber(str) {
+          return typeof str === "string" ? parseInt(str) : str;
+        }
+        for (const elem of toBeImported.split(";")) {
+          const [key, value] = elem.split(":");
+          switch (key) {
+            case "minProtein":
+              setMinProtein(stringToNumber(value));
+              break;
+            case "maxCalorie":
+              setMaxCalorie(stringToNumber(value));
+              break;
+            case "requirements":
+              const meats = [];
+              const veggies = [];
+              for (const requirement of value.split(",")) {
+                const [option, constraintType, constraintValue] =
+                  requirement.split("'");
+                const meat = meatOptions.find((o) => o.value === option);
+                if (meat) {
+                  meats.push({
+                    ...meat,
+                    constraintType,
+                    constraintValue,
+                  });
+                } else {
+                  const veggie = veggieOptions.find((o) => o.value === option);
+                  veggies.push({ ...veggie, constraintType, constraintValue });
+                }
+              }
+              setSelectedMeatOptions(meats);
+              setSelectedVeggieOptions(veggies);
+              break;
+            default:
+              break;
+          }
+        }
+        break;
+      default:
+        break;
+    }
+    return result;
+  }
+
   return (
     <div className="App">
       <h1>Protein And Calorie Balancer</h1>
@@ -158,6 +243,7 @@ function App() {
         <Select
           className="requirement-dropdown"
           defaultValue={selectedMeatOptions}
+          value={selectedMeatOptions}
           onChange={setSelectedMeatOptions}
           options={meatOptions}
           isMulti={true}
@@ -168,6 +254,7 @@ function App() {
         <Select
           className="requirement-dropdown"
           defaultValue={selectedVeggieOptions}
+          value={selectedVeggieOptions}
           onChange={setSelectedVeggieOptions}
           options={veggieOptions}
           isMulti={true}
@@ -181,13 +268,18 @@ function App() {
       </div>
       <div>
         <h2>Optional Requirements</h2>
-        <header>Any requirement on how much you can eat or how much you have to eat?</header>
+        <header>
+          Any requirement on how much you can eat or how much you have to eat?
+        </header>
         {[...selectedMeatOptions, ...selectedVeggieOptions].map((option) => {
           return (
             <div key={option.value}>
               {option.label}{" "}
               <Select
                 className="requirement-dropdown-narrow"
+                value={optionalRequirementOptions.find(
+                  (o) => o.value === option.constraintType
+                )}
                 onChange={(maxMinSelection) => {
                   const [selectedOptions, func] = meatOptions.some(
                     (o) => o.value === option.value
@@ -205,20 +297,7 @@ function App() {
                     })
                   );
                 }}
-                options={[
-                  {
-                    value: "max",
-                    label: "Maximum",
-                  },
-                  {
-                    value: "equal",
-                    label: "Exactly",
-                  },
-                  {
-                    value: "min",
-                    label: "Minimum",
-                  },
-                ]}
+                options={optionalRequirementOptions}
               />
               <input
                 type="number"
@@ -281,6 +360,17 @@ function App() {
               } finally {
                 setIsRunning(false);
               }
+              // Further processing
+              result.calorie = Math.round(result.result);
+              result.protein = Math.round(
+                [...meatOptions, ...veggieOptions].reduce((acc, currOption) => {
+                  return result[currOption.value]
+                    ? acc +
+                        (currOption.proteinPer100g / 100.0) *
+                          result[currOption.value]
+                    : acc;
+                }, 0)
+              );
               setRunResult(result);
             }}
           >
@@ -293,23 +383,8 @@ function App() {
             {runResult.feasible ? (
               <>
                 <ul className="result-list">
-                  <li>Total Calorie: {Math.round(runResult.result)}kcal</li>
-                  <li>
-                    Total Protein:{" "}
-                    {Math.round(
-                      [...meatOptions, ...veggieOptions].reduce(
-                        (acc, currOption) => {
-                          return runResult[currOption.value]
-                            ? acc +
-                                (currOption.proteinPer100g / 100.0) *
-                                  runResult[currOption.value]
-                            : acc;
-                        },
-                        0
-                      )
-                    )}
-                    g
-                  </li>
+                  <li>Total Calorie: {runResult.calorie}kcal</li>
+                  <li>Total Protein: {runResult.protein}g</li>
                 </ul>
                 <ul className="result-list">
                   {[...meatOptions, ...veggieOptions].map((option) => {
@@ -332,6 +407,33 @@ function App() {
             <br />
           </div>
         )}
+      </div>
+      <div>
+        <h2>Export/Import</h2>
+        Export inputs:
+        <input
+          disabled
+          type="text"
+          style={{ width: "95%" }}
+          id="export-input"
+          value={handleExportImport("export")}
+        ></input>
+        <FontAwesomeIcon
+          icon={faCopy}
+          size="2x"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            const content = document.getElementById("export-input").value;
+            navigator.clipboard.writeText(content);
+          }}
+        />
+        <br />
+        Import inputs:
+        <input
+          type="text"
+          style={{ width: "100%" }}
+          onChange={(e) => handleExportImport("import", e.target.value)}
+        ></input>
       </div>
       <ToastContainer theme="colored" />
     </div>
