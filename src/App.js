@@ -43,6 +43,30 @@ const meatOptions = [
     caloriePer100g: 127,
   },
   {
+    value: "porkTenderloin",
+    label: "Pork Tenderloin",
+    source:
+      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_tenderloin%2C_loin%2C_fresh_nutritional_value.html?size=100+g",
+    proteinPer100g: 21,
+    caloriePer100g: 120,
+  },
+  {
+    value: "porkBelly",
+    label: "Pork Belly",
+    source:
+      "https://www.nutritionvalue.org/Pork%2C_raw%2C_belly%2C_fresh_nutritional_value.html?size=100+g",
+    proteinPer100g: 9.3,
+    caloriePer100g: 518,
+  },
+  {
+    value: "italianPorkSausage",
+    label: "Italian Pork Sausage",
+    source:
+      "https://www.nutritionvalue.org/Sausage%2C_raw%2C_mild%2C_pork%2C_Italian_nutritional_value.html?size=100+g",
+    proteinPer100g: 14,
+    caloriePer100g: 290,
+  },
+  {
     value: "pinkSalmon",
     label: "Pink Salmon",
     source:
@@ -57,6 +81,38 @@ const meatOptions = [
       "https://www.nutritionvalue.org/Fish%2C_raw%2C_yellowfin%2C_fresh%2C_tuna_nutritional_value.html?size=100%20g",
     proteinPer100g: 24,
     caloriePer100g: 109,
+  },
+  {
+    value: "atlanticCod",
+    label: "Atlantic Cod",
+    source:
+      "https://www.nutritionvalue.org/Fish%2C_raw%2C_Atlantic%2C_cod_nutritional_value.html?size=100+g",
+    proteinPer100g: 18,
+    caloriePer100g: 82,
+  },
+  {
+    value: "tilapia",
+    label: "Tilapia",
+    source:
+      "https://www.nutritionvalue.org/Fish%2C_raw%2C_tilapia_nutritional_value.html?size=100+g",
+    proteinPer100g: 20,
+    caloriePer100g: 96,
+  },
+  {
+    value: "keyWestPinkShrimp",
+    label: "Key West Pink Shrimp",
+    source:
+      "https://www.nutritionvalue.org/Key_west_pink_shrimp_546566_nutritional_value.html?size=100%20g",
+    proteinPer100g: 16,
+    caloriePer100g: 71,
+  },
+  {
+    value: "egg",
+    label: "Egg",
+    source:
+      "https://www.nutritionvalue.org/Egg%2C_fresh%2C_raw%2C_whole_nutritional_value.html?size=100+g",
+    proteinPer100g: 13,
+    caloriePer100g: 143,
   },
   {
     value: "eggWhite",
@@ -85,6 +141,22 @@ const veggieOptions = [
     caloriePer100g: 40,
   },
   {
+    value: "butter",
+    label: "Butter",
+    source:
+      "https://www.nutritionvalue.org/Butter%2C_without_salt_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.9,
+    caloriePer100g: 717,
+  },
+  {
+    value: "avocado",
+    label: "Avocado",
+    source:
+      "https://www.nutritionvalue.org/Avocado%2C_raw_63105010_nutritional_value.html?size=100+g",
+    proteinPer100g: 2,
+    caloriePer100g: 160,
+  },
+  {
     value: "onion",
     label: "Onion",
     source:
@@ -101,6 +173,22 @@ const veggieOptions = [
     caloriePer100g: 41,
   },
   {
+    value: "greenPeas",
+    label: "Green Peas",
+    source:
+      "https://www.nutritionvalue.org/Peas%2C_raw%2C_green_nutritional_value.html?size=100+g",
+    proteinPer100g: 5.4,
+    caloriePer100g: 81,
+  },
+  {
+    value: "greenBeans",
+    label: "Green Beans",
+    source:
+      "https://www.nutritionvalue.org/Beans%2C_raw%2C_green%2C_snap_nutritional_value.html",
+    proteinPer100g: 1.8,
+    caloriePer100g: 31,
+  },
+  {
     value: "cabbage",
     label: "Cabbage",
     source:
@@ -109,12 +197,44 @@ const veggieOptions = [
     caloriePer100g: 25,
   },
   {
+    value: "lettuce",
+    label: "Lettuce",
+    source:
+      "https://www.nutritionvalue.org/Lettuce%2C_raw%2C_green_leaf_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.4,
+    caloriePer100g: 15,
+  },
+  {
     value: "garlic",
     label: "Garlic",
     source:
       "https://www.nutritionvalue.org/Garlic%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 6.4,
     caloriePer100g: 149,
+  },
+  {
+    value: "watermelon",
+    label: "Watermelon",
+    source:
+      "https://www.nutritionvalue.org/Watermelon%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.6,
+    caloriePer100g: 30,
+  },
+  {
+    value: "banana",
+    label: "Banana",
+    source:
+      "https://www.nutritionvalue.org/Bananas%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 89,
+  },
+  {
+    value: "appleWithoutSkin",
+    label: "Apple without skin",
+    source:
+      "https://www.nutritionvalue.org/Apples%2C_without_skin%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.3,
+    caloriePer100g: 48,
   },
 ];
 
@@ -487,6 +607,7 @@ function App() {
             <br />
             <img
               src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/MyatSFk0x6-inequality-constraints.png?width=4000"
+              alt="linear programming example chart"
               style={{ width: "50%" }}
             ></img>
           </>
