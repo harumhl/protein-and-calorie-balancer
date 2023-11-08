@@ -2,6 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -145,17 +146,18 @@ function App() {
     let result;
     switch (type) {
       case "export":
+        const requirements = [
+          ...selectedMeatOptions,
+          ...selectedVeggieOptions,
+        ].map((o) =>
+          o.constraintType && o.constraintValue
+            ? `${o.value}'${o.constraintType}'${o.constraintValue}`
+            : o.value
+        );
         result =
           `minProtein:${minProtein};` +
           `maxCalorie:${maxCalorie};` +
-          `requirements:${[
-            ...selectedMeatOptions,
-            ...selectedVeggieOptions,
-          ].map((o) =>
-            o.constraintType && o.constraintValue
-              ? `${o.value}'${o.constraintType}'${o.constraintValue}`
-              : o.value
-          )};`;
+          (requirements.length > 0 ? `requirements:${requirements};` : "");
         break;
       case "import":
         function stringToNumber(str) {
@@ -419,8 +421,30 @@ function App() {
           onClick={() => {
             const content = handleExportImport("export");
             navigator.clipboard.writeText(content);
+            toast.success("Copied to clipboard");
           }}
           title="Click to copy"
+        />
+        <br />
+        Save to current browser:
+        <FontAwesomeIcon
+          icon={faChrome}
+          size="2x"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            if (localStorage.getItem("protein-and-calorie-balancer")) {
+              const shouldProceed = window.confirm(
+                "This will overwrite the existing save. Proceed?"
+              );
+              if (!shouldProceed) {
+                return;
+              }
+            }
+            const content = handleExportImport("export");
+            localStorage.setItem("protein-and-calorie-balancer", content);
+            toast.success("Saved to browser");
+          }}
+          title="Click to save"
         />
         <br />
         Import inputs:
@@ -429,6 +453,20 @@ function App() {
           style={{ width: "96%" }}
           onChange={(e) => handleExportImport("import", e.target.value)}
         ></input>
+        <br />
+        Load from the browser:
+        <FontAwesomeIcon
+          icon={faChrome}
+          size="2x"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            const content = localStorage.getItem(
+              "protein-and-calorie-balancer"
+            );
+            handleExportImport("import", content);
+          }}
+          title="Click to load"
+        />
       </div>
       <div>
         This uses Linear Programming to solve the problem.
@@ -436,15 +474,21 @@ function App() {
         {learnMore && (
           <>
             <br />
-            Basically, a linear program is a program where you try to find the minimum (or maximum) of multiple linear functions, subject to some constraints.
+            Basically, a linear program is a program where you try to find the
+            minimum (or maximum) of multiple linear functions, subject to some
+            constraints.
             <br />
-            In below chart, the intersection of two lines would be considered the optimal solution.
+            In below chart, the intersection of two lines would be considered
+            the optimal solution.
             <br />
             <a href="https://brilliant.org/wiki/linear-programming/">
               Good resources
             </a>
             <br />
-            <img src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/MyatSFk0x6-inequality-constraints.png?width=4000" style={{width: '50%'}}></img>
+            <img
+              src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/MyatSFk0x6-inequality-constraints.png?width=4000"
+              style={{ width: "50%" }}
+            ></img>
           </>
         )}
       </div>
