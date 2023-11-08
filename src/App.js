@@ -548,7 +548,8 @@ function App() {
                       runResult[option.value] && (
                         <li key={`result-${option.value}`}>
                           {/* Round to the first decimal e.g. 123.456 -> 123.4 */}
-                          {option.label}: {Math.round(runResult[option.value] * 10) / 10}g
+                          {option.label}:{" "}
+                          {Math.round(runResult[option.value] * 10) / 10}g
                         </li>
                       )
                     );
@@ -645,6 +646,12 @@ function App() {
             ></img>
           </>
         )}
+      </div>
+      <div>
+        Source and Credit:{" "}
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/harumhl/protein-and-calorie-balancer">
+          https://github.com/harumhl/protein-and-calorie-balancer
+        </a>
       </div>
       <ToastContainer theme="colored" />
     </div>
