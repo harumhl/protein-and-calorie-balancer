@@ -236,6 +236,38 @@ const veggieOptions = [
     proteinPer100g: 0.3,
     caloriePer100g: 48,
   },
+  {
+    value: "longGrainBrownRice",
+    label: "long grain Brown Rice",
+    source:
+      "https://www.nutritionvalue.org/Rice%2C_raw%2C_long-grain%2C_brown_nutritional_value.html?size=100%20g",
+    proteinPer100g: 7.5,
+    caloriePer100g: 367,
+  },
+  {
+    value: "longGrainWhiteRice",
+    label: "long grain White Rice",
+    source:
+      "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_raw%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
+    proteinPer100g: 7.1,
+    caloriePer100g: 365,
+  },
+  {
+    value: "wheatBread",
+    label: "Wheat Bread",
+    source:
+      "https://www.nutritionvalue.org/Bread%2C_wheat_nutritional_value.html?size=100+g",
+    proteinPer100g: 11,
+    caloriePer100g: 274,
+  },
+  {
+    value: "wheatBagel",
+    label: "Wheat Bagel",
+    source:
+      "https://www.nutritionvalue.org/Bagel%2C_wheat_51301700_nutritional_value.html?size=100+g",
+    proteinPer100g: 10,
+    caloriePer100g: 250,
+  },
 ];
 
 const optionalRequirementOptions = [
@@ -281,7 +313,7 @@ function App() {
         break;
       case "import":
         function stringToNumber(str) {
-          return typeof str === "string" ? parseInt(str) : str;
+          return typeof str === "string" ? parseFloat(str) : str;
         }
         for (const elem of toBeImported.split(";")) {
           const [key, value] = elem.split(":");
@@ -336,7 +368,7 @@ function App() {
           onChange={(e) =>
             setMinProtein(
               typeof e.target.value === "string"
-                ? parseInt(e.target.value)
+                ? parseFloat(e.target.value)
                 : e.target.value
             )
           }
@@ -350,7 +382,7 @@ function App() {
           onChange={(e) =>
             setMaxCalorie(
               typeof e.target.value === "string"
-                ? parseInt(e.target.value)
+                ? parseFloat(e.target.value)
                 : e.target.value
             )
           }
@@ -439,7 +471,7 @@ function App() {
                             ...o,
                             constraintValue:
                               typeof e.target.value === "string"
-                                ? parseInt(e.target.value)
+                                ? parseFloat(e.target.value)
                                 : e.target.value,
                           };
                     })
@@ -515,7 +547,8 @@ function App() {
                     return (
                       runResult[option.value] && (
                         <li key={`result-${option.value}`}>
-                          {option.label}: {Math.round(runResult[option.value])}g
+                          {/* Round to the first decimal e.g. 123.456 -> 123.4 */}
+                          {option.label}: {Math.round(runResult[option.value] * 10) / 10}g
                         </li>
                       )
                     );
