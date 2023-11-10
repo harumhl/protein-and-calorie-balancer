@@ -42,6 +42,12 @@
   display: inline-block;
 }
 
+.requirement-dropdown-medium {
+  width: 200px;
+  display: inline-block;
+
+}
+
 .requirement-dropdown-narrow {
   width: 100px;
   display: inline-block;

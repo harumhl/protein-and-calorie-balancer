@@ -131,14 +131,15 @@ const meatOptions = [
     caloriePer100g: 76,
   },
 ];
+
 const veggieOptions = [
   {
     value: "oliveOil",
     label: "Olive Oil",
     source:
-      "https://www.nutritionvalue.org/Egg%2C_fresh%2C_raw%2C_white_nutritional_value.html?size=100%20g",
+      "https://www.nutritionvalue.org/Oil%2C_salad_or_cooking%2C_olive_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
-    caloriePer100g: 40,
+    caloriePer100g: 884,
   },
   {
     value: "butter",
@@ -205,6 +206,13 @@ const veggieOptions = [
     caloriePer100g: 15,
   },
   {
+    value: "celery",
+    label: "Celery",
+    source: "https://www.nutritionvalue.org/Celery%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 14,
+  },
+  {
     value: "garlic",
     label: "Garlic",
     source:
@@ -235,6 +243,14 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Apples%2C_without_skin%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 0.3,
     caloriePer100g: 48,
+  },
+  {
+    value: "appleWithSkin",
+    label: "Apple with skin",
+    source:
+      "https://www.nutritionvalue.org/Apples%2C_with_skin%2C_raw_nutritional_value.html?size=100%20g",
+    proteinPer100g: 0.3,
+    caloriePer100g: 52,
   },
   {
     value: "longGrainBrownRice",
@@ -286,6 +302,8 @@ const optionalRequirementOptions = [
 ];
 
 function App() {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
   const [selectedMeatOptions, setSelectedMeatOptions] = useState([]);
@@ -359,6 +377,60 @@ function App() {
   return (
     <div className="App">
       <h1>Protein And Calorie Balancer</h1>
+      <div
+        style={{
+          float: "right",
+          position: "absolute",
+          right: 0,
+          paddingRight: "10px",
+        }}
+      >
+        <Select
+          className="requirement-dropdown-medium"
+          style={{ width: "150px" }}
+          defaultValue={[]}
+          onChange={setSelectedOption}
+          options={[...meatOptions, ...veggieOptions]}
+          isSearchable={true}
+          placeholder="Ingredient calorie & protein"
+        />
+        {selectedOption && (
+          <div>
+            <table style={{ float: "right", borderCollapse: 'collapse', padding: '5px' }}>
+              <thead>
+                <tr>
+                  <td style={{ border: "1px solid #000000" }}>
+                    Calorie per 100g
+                  </td>
+                  <td style={{ border: "1px solid #000000" }}>
+                    Protein per 100g
+                  </td>
+                  <td style={{ border: "1px solid #000000" }}>source</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ border: "1px solid #000000" }}>
+                    {selectedOption.caloriePer100g}
+                  </td>
+                  <td style={{ border: "1px solid #000000" }}>
+                    {selectedOption.proteinPer100g}
+                  </td>
+                  <td style={{ border: "1px solid #000000" }}>
+                    <a
+                      href={`${selectedOption.source}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      link
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
       <div>
         <h2>One-Meal Goal</h2>
         Minimum protein:
@@ -417,7 +489,11 @@ function App() {
         />
         <br />
         source (consumed on Nov 2023):{" "}
-        <a href="https://www.nutritionvalue.org/">
+        <a
+          href="https://www.nutritionvalue.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           https://www.nutritionvalue.org/
         </a>
       </div>
@@ -635,7 +711,11 @@ function App() {
             In below chart, the intersection of two lines would be considered
             the optimal solution.
             <br />
-            <a href="https://brilliant.org/wiki/linear-programming/">
+            <a
+              href="https://brilliant.org/wiki/linear-programming/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Good resources
             </a>
             <br />
@@ -649,7 +729,11 @@ function App() {
       </div>
       <div>
         Source and Credit:{" "}
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/harumhl/protein-and-calorie-balancer">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/harumhl/protein-and-calorie-balancer"
+        >
           https://github.com/harumhl/protein-and-calorie-balancer
         </a>
       </div>
