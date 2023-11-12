@@ -19,6 +19,14 @@ const meatOptions = [
     caloriePer100g: 120,
   },
   {
+    value: "chickenThigh",
+    label: "Chicken Thigh",
+    source:
+      "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_thigh%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
+    proteinPer100g: 17,
+    caloriePer100g: 221,
+  },
+  {
     value: "groundPork",
     label: "Ground Pork",
     source:
@@ -283,6 +291,14 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Bagel%2C_wheat_51301700_nutritional_value.html?size=100+g",
     proteinPer100g: 10,
     caloriePer100g: 250,
+  },
+  {
+    value: "hempSeeds",
+    label: "Hemp Seeds",
+    source:
+      "https://www.nutritionvalue.org/Seeds%2C_hulled%2C_hemp_seed_nutritional_value.html?size=100+g",
+    proteinPer100g: 32,
+    caloriePer100g: 553,
   },
 ];
 
