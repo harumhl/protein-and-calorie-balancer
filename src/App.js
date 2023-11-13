@@ -19,12 +19,20 @@ const meatOptions = [
     caloriePer100g: 120,
   },
   {
-    value: "chickenThigh",
-    label: "Chicken Thigh",
+    value: "chickenThighWithSkin",
+    label: "Chicken Thigh (with skin)",
     source:
       "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_thigh%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
     proteinPer100g: 17,
     caloriePer100g: 221,
+  },
+  {
+    value: "chickenThighWithoutSkin",
+    label: "Chicken Thigh (without skin)",
+    source:
+      "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_only%2C_thigh%2C_dark_meat%2C_broilers_or_fryers_nutritional_value.html?size=100%20g",
+    proteinPer100g: 20,
+    caloriePer100g: 121,
   },
   {
     value: "groundPork",
@@ -246,7 +254,7 @@ const veggieOptions = [
   },
   {
     value: "appleWithoutSkin",
-    label: "Apple without skin",
+    label: "Apple (without skin)",
     source:
       "https://www.nutritionvalue.org/Apples%2C_without_skin%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 0.3,
@@ -254,7 +262,7 @@ const veggieOptions = [
   },
   {
     value: "appleWithSkin",
-    label: "Apple with skin",
+    label: "Apple (with skin)",
     source:
       "https://www.nutritionvalue.org/Apples%2C_with_skin%2C_raw_nutritional_value.html?size=100%20g",
     proteinPer100g: 0.3,
@@ -299,6 +307,22 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Seeds%2C_hulled%2C_hemp_seed_nutritional_value.html?size=100+g",
     proteinPer100g: 32,
     caloriePer100g: 553,
+  },
+  {
+    value: "onionPowder",
+    label: "Onion Powder",
+    source:
+      "https://www.nutritionvalue.org/Spices%2C_onion_powder_nutritional_value.html?size=100+g",
+    proteinPer100g: 10,
+    caloriePer100g: 341,
+  },
+  {
+    value: "garlicPowder",
+    label: "Garlic Powder",
+    source:
+      "https://www.nutritionvalue.org/Spices%2C_garlic_powder_nutritional_value.html?size=100+g",
+    proteinPer100g: 17,
+    caloriePer100g: 331,
   },
 ];
 
