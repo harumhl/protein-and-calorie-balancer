@@ -35,6 +35,14 @@ const meatOptions = [
     caloriePer100g: 121,
   },
   {
+    value: "turkeyBreast",
+    label: "Turkey Breast",
+    source:
+      "https://www.nutritionvalue.org/Turkey%2C_raw%2C_meat_and_skin%2C_breast%2C_all_classes_nutritional_value.html?size=100+g",
+    proteinPer100g: 22,
+    caloriePer100g: 157,
+  },
+  {
     value: "groundPork",
     label: "Ground Pork",
     source:
@@ -49,6 +57,14 @@ const meatOptions = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_bone-in%2C_sirloin_%28chops_or_roasts%29%2C_loin%2C_fresh_nutritional_value.html",
     proteinPer100g: 23,
     caloriePer100g: 190,
+  },
+  {
+    value: "porkLoin",
+    label: "Pork Loin",
+    source:
+      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_whole%2C_loin%2C_fresh_nutritional_value.html",
+    proteinPer100g: 22,
+    caloriePer100g: 224,
   },
   {
     value: "porkChop",
@@ -208,6 +224,38 @@ const veggieOptions = [
     caloriePer100g: 31,
   },
   {
+    value: "chickpea",
+    label: "Chickpea",
+    source:
+      "https://www.nutritionvalue.org/Chickpeas_%28garbanzo_beans%2C_bengal_gram%29%2C_raw%2C_mature_seeds_nutritional_value.html?size=100%20g",
+    proteinPer100g: 20,
+    caloriePer100g: 378,
+  },
+  {
+    value: "edamamePrepared",
+    label: "Edamame (prepared",
+    source:
+      "https://www.nutritionvalue.org/Edamame%2C_prepared%2C_frozen_nutritional_value.html",
+    proteinPer100g: 18,
+    caloriePer100g: 188,
+  },
+  {
+    value: "hummus",
+    label: "Hummus",
+    source:
+      "https://www.nutritionvalue.org/Hummus_554432_nutritional_value.html?size=100+g",
+    proteinPer100g: 6.7,
+    caloriePer100g: 167,
+  },
+  {
+    value: "lentilsBoiled",
+    label: "Lentils (boiled)",
+    source:
+      "https://www.nutritionvalue.org/Lentils%2C_without_salt%2C_boiled%2C_cooked%2C_mature_seeds_nutritional_value.html?size=100+g",
+    proteinPer100g: 9,
+    caloriePer100g: 116,
+  },
+  {
     value: "cabbage",
     label: "Cabbage",
     source:
@@ -286,7 +334,7 @@ const veggieOptions = [
     source:
       "https://www.nutritionvalue.org/Rice%2C_raw%2C_long-grain%2C_brown_nutritional_value.html?size=100%20g",
     proteinPer100g: 7.5,
-    caloriePer100g: 367, // TODO Noom disagrees
+    caloriePer100g: 367, // TODO Noom disagrees - because this is raw?
   },
   {
     value: "longGrainWhiteRice",
@@ -294,7 +342,7 @@ const veggieOptions = [
     source:
       "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_raw%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
     proteinPer100g: 7.1,
-    caloriePer100g: 365, // TODO Noom disagrees
+    caloriePer100g: 365, // TODO Noom disagrees - because this is raw?
   },
   {
     value: "wheatBread",
@@ -362,6 +410,14 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Salad_dressing%2C_regular%2C_mayonnaise_nutritional_value.html?size=100+g",
     proteinPer100g: 1,
     caloriePer100g: 680,
+  },
+  {
+    value: "worcestershireSauce",
+    label: "Worcestershire sauce",
+    source:
+      "https://www.nutritionvalue.org/Worcestershire_sauce_41420450_nutritional_value.html?size=100+g",
+    proteinPer100g: 0,
+    caloriePer100g: 77,
   },
 ];
 
