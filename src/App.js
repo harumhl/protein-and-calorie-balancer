@@ -14,9 +14,9 @@ const meatOptions = [
     value: "chickenBreast",
     label: "Chicken Breast",
     source:
-      "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_only%2C_boneless%2C_skinless%2C_breast%2C_broiler_or_fryers_nutritional_value.html?size=100%20g",
-    proteinPer100g: 23,
-    caloriePer100g: 120,
+      "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_breast%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
+    proteinPer100g: 21,
+    caloriePer100g: 172,
   },
   {
     value: "chickenThighWithSkin",
@@ -46,17 +46,17 @@ const meatOptions = [
     value: "porkSirloin",
     label: "Pork Sirloin",
     source:
-      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_boneless%2C_sirloin_%28chops_or_roasts%29%2C_loin%2C_fresh_nutritional_value.html?size=100%20g",
-    proteinPer100g: 22,
-    caloriePer100g: 133,
+      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_bone-in%2C_sirloin_%28chops_or_roasts%29%2C_loin%2C_fresh_nutritional_value.html",
+    proteinPer100g: 23,
+    caloriePer100g: 190,
   },
   {
     value: "porkChop",
     label: "Pork Chop",
     source:
-      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_only%2C_boneless%2C_top_loin_%28chops%29%2C_loin%2C_fresh_nutritional_value.html?size=100%20g",
-    proteinPer100g: 22,
-    caloriePer100g: 127,
+      "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_bone-in%2C_center_loin_%28chops%29%2C_loin%2C_fresh_nutritional_value.html",
+    proteinPer100g: 23,
+    caloriePer100g: 192,
   },
   {
     value: "porkTenderloin",
@@ -110,9 +110,9 @@ const meatOptions = [
     value: "tilapia",
     label: "Tilapia",
     source:
-      "https://www.nutritionvalue.org/Fish%2C_raw%2C_tilapia_nutritional_value.html?size=100+g",
-    proteinPer100g: 20,
-    caloriePer100g: 96,
+      "https://www.nutritionvalue.org/Fish%2C_dry_heat%2C_cooked%2C_tilapia_nutritional_value.html?size=100+g",
+    proteinPer100g: 26,
+    caloriePer100g: 128,
   },
   {
     value: "keyWestPinkShrimp",
@@ -149,6 +149,7 @@ const meatOptions = [
 ];
 
 const veggieOptions = [
+  // Fatty
   {
     value: "oliveOil",
     label: "Olive Oil",
@@ -173,6 +174,7 @@ const veggieOptions = [
     proteinPer100g: 2,
     caloriePer100g: 160,
   },
+  // Veggies
   {
     value: "onion",
     label: "Onion",
@@ -214,6 +216,14 @@ const veggieOptions = [
     caloriePer100g: 25,
   },
   {
+    value: "redCabbage",
+    label: "Red Cabbage",
+    source:
+      "https://www.nutritionvalue.org/Cabbage%2C_raw%2C_red_nutritional_value.html",
+    proteinPer100g: 1.3,
+    caloriePer100g: 28,
+  },
+  {
     value: "lettuce",
     label: "Lettuce",
     source:
@@ -236,6 +246,7 @@ const veggieOptions = [
     proteinPer100g: 6.4,
     caloriePer100g: 149,
   },
+  // Fruits
   {
     value: "watermelon",
     label: "Watermelon",
@@ -268,13 +279,14 @@ const veggieOptions = [
     proteinPer100g: 0.3,
     caloriePer100g: 52,
   },
+  // Grains
   {
     value: "longGrainBrownRice",
     label: "long grain Brown Rice",
     source:
       "https://www.nutritionvalue.org/Rice%2C_raw%2C_long-grain%2C_brown_nutritional_value.html?size=100%20g",
     proteinPer100g: 7.5,
-    caloriePer100g: 367,
+    caloriePer100g: 367, // TODO Noom disagrees
   },
   {
     value: "longGrainWhiteRice",
@@ -282,7 +294,7 @@ const veggieOptions = [
     source:
       "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_raw%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
     proteinPer100g: 7.1,
-    caloriePer100g: 365,
+    caloriePer100g: 365, // TODO Noom disagrees
   },
   {
     value: "wheatBread",
@@ -296,10 +308,11 @@ const veggieOptions = [
     value: "wheatBagel",
     label: "Wheat Bagel",
     source:
-      "https://www.nutritionvalue.org/Bagel%2C_wheat_51301700_nutritional_value.html?size=100+g",
-    proteinPer100g: 10,
-    caloriePer100g: 250,
+      "https://www.nutritionvalue.org/Bagel%2C_whole_wheat_51301750_nutritional_value.html",
+    proteinPer100g: 13,
+    caloriePer100g: 328,
   },
+  // Seeds
   {
     value: "hempSeeds",
     label: "Hemp Seeds",
@@ -308,6 +321,7 @@ const veggieOptions = [
     proteinPer100g: 32,
     caloriePer100g: 553,
   },
+  // Powder
   {
     value: "onionPowder",
     label: "Onion Powder",
@@ -323,6 +337,31 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Spices%2C_garlic_powder_nutritional_value.html?size=100+g",
     proteinPer100g: 17,
     caloriePer100g: 331,
+  },
+  // Condiments
+  {
+    value: "relish",
+    label: "Relish",
+    source:
+      "https://www.nutritionvalue.org/Relish%2C_pickle_75503020_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.4,
+    caloriePer100g: 130,
+  },
+  {
+    value: "mustard",
+    label: "Mustard",
+    source:
+      "https://www.nutritionvalue.org/Mustard%2C_yellow%2C_prepared_nutritional_value.html?size=100+g",
+    proteinPer100g: 3.7,
+    caloriePer100g: 60,
+  },
+  {
+    value: "mayonnaise",
+    label: "Mayonnaise",
+    source:
+      "https://www.nutritionvalue.org/Salad_dressing%2C_regular%2C_mayonnaise_nutritional_value.html?size=100+g",
+    proteinPer100g: 1,
+    caloriePer100g: 680,
   },
 ];
 
