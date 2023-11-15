@@ -191,6 +191,78 @@ const veggieOptions = [
     caloriePer100g: 717,
   },
   {
+    value: "ghee",
+    label: "Ghee",
+    source:
+      "https://www.nutritionvalue.org/Butter%2C_Clarified_butter_%28ghee%29_nutritional_value.html?size=100+g",
+    proteinPer100g: 0,
+    caloriePer100g: 900,
+  },
+  {
+    value: "creamCheese",
+    label: "Cream cheese",
+    source:
+      "https://www.nutritionvalue.org/Cheese%2C_cream_nutritional_value.html?size=100+g",
+    proteinPer100g: 6.2,
+    caloriePer100g: 350,
+  },
+  {
+    value: "cottageCheese",
+    label: "Cottage cheese",
+    source:
+      "https://www.nutritionvalue.org/Cottage_cheese_1028783_nutritional_value.html?size=100+g",
+    proteinPer100g: 9.7,
+    caloriePer100g: 88,
+  },
+  {
+    value: "fetaCheese",
+    label: "Feta cheese",
+    source:
+      "https://www.nutritionvalue.org/Cheese%2C_Feta_14104400_nutritional_value.html?size=100+g",
+    proteinPer100g: 14,
+    caloriePer100g: 265,
+  },
+  {
+    value: "cheddarCheese",
+    label: "Cheddar cheese",
+    source:
+      "https://www.nutritionvalue.org/Cheese%2C_cheddar_nutritional_value.html?size=100+g",
+    proteinPer100g: 23,
+    caloriePer100g: 403,
+  },
+  {
+    value: "americanCheese",
+    label: "American cheese",
+    source:
+      "https://www.nutritionvalue.org/Cheese%2C_restaurant%2C_American_747429_nutritional_value.html?size=100+g",
+    proteinPer100g: 18,
+    caloriePer100g: 375,
+  },
+  {
+    value: "mozzarellaCheese",
+    label: "Mozzarella cheese",
+    source:
+      "https://www.nutritionvalue.org/Cheese%2C_whole_milk%2C_mozzarella_nutritional_value.html?size=100+g",
+    proteinPer100g: 22,
+    caloriePer100g: 299,
+  },
+  {
+    value: "greekYogurt",
+    label: "Greek Yogurt",
+    source:
+      "https://www.nutritionvalue.org/Yogurt%2C_whole_milk%2C_plain%2C_Greek_nutritional_value.html?size=100+g",
+    proteinPer100g: 9,
+    caloriePer100g: 97,
+  },
+  {
+    value: "milk",
+    label: "Milk",
+    source:
+      "https://www.nutritionvalue.org/Whole_milk_735370_nutritional_value.html?size=100+g",
+    proteinPer100g: 3.3,
+    caloriePer100g: 62,
+  },
+  {
     value: "avocado",
     label: "Avocado",
     source:
@@ -214,6 +286,22 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Carrots%2C_raw_nutritional_value.html?size=100%20g",
     proteinPer100g: 0.9,
     caloriePer100g: 41,
+  },
+  {
+    value: "potato",
+    label: "Potato",
+    source:
+      "https://www.nutritionvalue.org/Potatoes%2C_raw%2C_flesh_and_skin_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.1,
+    caloriePer100g: 77,
+  },
+  {
+    value: "sweetPotato",
+    label: "Sweet Potato",
+    source:
+      "https://www.nutritionvalue.org/Sweet_potato%2C_unprepared%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.6,
+    caloriePer100g: 86,
   },
   {
     value: "greenPeas",
@@ -293,6 +381,20 @@ const veggieOptions = [
     source: "https://www.nutritionvalue.org/Celery%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 0.7,
     caloriePer100g: 14,
+  },
+  {
+    value: "mushroom",
+    label: "Mushroom",
+    source: "https://www.nutritionvalue.org/Mushrooms%2C_raw%2C_white_nutritional_value.html?size=100+g",
+    proteinPer100g: 3.1,
+    caloriePer100g: 22,
+  },
+  {
+    value: "plantains",
+    label: "Plantains",
+    source: "https://www.nutritionvalue.org/Plantains%2C_raw%2C_green_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.3,
+    caloriePer100g: 152,
   },
   {
     value: "garlic",
@@ -396,6 +498,14 @@ const veggieOptions = [
   },
   // Condiments
   {
+    value: "lemonJuice",
+    label: "Lemon Juice",
+    source:
+      "https://www.nutritionvalue.org/Lemon_juice%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.4,
+    caloriePer100g: 22,
+  },
+  {
     value: "relish",
     label: "Relish",
     source:
@@ -420,12 +530,60 @@ const veggieOptions = [
     caloriePer100g: 680,
   },
   {
+    value: "ketchup",
+    label: "Ketchup",
+    source:
+      "https://www.nutritionvalue.org/Ketchup_74401010_nutritional_value.html?size=100+g",
+    proteinPer100g: 1,
+    caloriePer100g: 101,
+  },
+  {
+    value: "sriracha",
+    label: "Sriracha",
+    source:
+      "https://www.nutritionvalue.org/Sauce%2C_sriracha%2C_hot_chile_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.9,
+    caloriePer100g: 93,
+  },
+  {
+    value: "salsa",
+    label: "Salsa",
+    source:
+      "https://www.nutritionvalue.org/Salsa_552834_nutritional_value.html?size=100+g",
+    proteinPer100g: 0,
+    caloriePer100g: 36,
+  },
+  {
     value: "worcestershireSauce",
     label: "Worcestershire sauce",
     source:
       "https://www.nutritionvalue.org/Worcestershire_sauce_41420450_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 77,
+  },
+  {
+    value: "honey",
+    label: "Honey",
+    source:
+      "https://www.nutritionvalue.org/Honey_nutritional_value.html?size=100%20g",
+    proteinPer100g: 0.3,
+    caloriePer100g: 304,
+  },
+  {
+    value: "mapleSyrup",
+    label: "Maple Syrup",
+    source:
+      "https://www.nutritionvalue.org/Syrups%2C_maple_nutritional_value.html?size=100+g",
+    proteinPer100g: 0,
+    caloriePer100g: 260,
+  },
+  {
+    value: "balsamicVinegar",
+    label: "Balsamic Vinegar",
+    source:
+      "https://www.nutritionvalue.org/Vinegar%2C_balsamic_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.5,
+    caloriePer100g: 88,
   },
 ];
 
