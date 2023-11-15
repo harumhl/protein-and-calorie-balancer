@@ -89,8 +89,6 @@ function handleExportImport(
 }
 
 function Calculate() {
-  const [selectedOption, setSelectedOption] = useState(null); // TODO factor out
-
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
   const [selectedMeatOptions, setSelectedMeatOptions] = useState([]);
@@ -112,67 +110,6 @@ function Calculate() {
 
   return (
     <>
-      <div
-        style={{
-          float: "right", // TODO remove on mobile - to make it mobile friendly
-          position: "absolute", // TODO remove on mobile - to make it mobile friendly
-          right: 0,
-          paddingRight: "10px",
-        }}
-      >
-        <Select
-          className="requirement-dropdown-medium"
-          style={{ width: "150px" }}
-          defaultValue={[]}
-          onChange={setSelectedOption}
-          options={[...meatOptions, ...veggieOptions]}
-          isSearchable={true}
-          // TODO display the whole table and make it sortable
-          placeholder="Ingredient calorie & protein"
-        />
-        {selectedOption && (
-          <div>
-            <table
-              style={{
-                float: "right",
-                borderCollapse: "collapse",
-                padding: "5px",
-              }}
-            >
-              <thead>
-                <tr>
-                  <td style={{ border: "1px solid #000000" }}>
-                    Calorie per 100g
-                  </td>
-                  <td style={{ border: "1px solid #000000" }}>
-                    Protein per 100g
-                  </td>
-                  <td style={{ border: "1px solid #000000" }}>source</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ border: "1px solid #000000" }}>
-                    {selectedOption.caloriePer100g}
-                  </td>
-                  <td style={{ border: "1px solid #000000" }}>
-                    {selectedOption.proteinPer100g}
-                  </td>
-                  <td style={{ border: "1px solid #000000" }}>
-                    <a
-                      href={`${selectedOption.source}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      link
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
       <div>
         <h2>One-Meal Goal</h2>
         Minimum protein:
