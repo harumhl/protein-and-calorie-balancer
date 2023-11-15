@@ -148,7 +148,6 @@ function Calculate() {
         "Meats" (aka protein source):
         <Select
           className="requirement-dropdown"
-          // TODO select all
           defaultValue={selectedMeatOptions}
           value={selectedMeatOptions}
           onChange={setSelectedMeatOptions}

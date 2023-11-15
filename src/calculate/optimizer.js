@@ -15,7 +15,6 @@ async function optimize(
     };
   });
   const model = {
-    // TODO try multi-objective optimization
     optimize: "calorie",
     opType: "min",
     constraints: {

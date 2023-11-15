@@ -436,7 +436,7 @@ const veggieOptions = [
     source:
       "https://www.nutritionvalue.org/Rice%2C_raw%2C_long-grain%2C_brown_nutritional_value.html?size=100%20g",
     proteinPer100g: 7.5,
-    caloriePer100g: 367, // TODO Noom disagrees - because this is raw?
+    caloriePer100g: 367,
   },
   {
     value: "longGrainWhiteRice",
@@ -444,7 +444,7 @@ const veggieOptions = [
     source:
       "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_raw%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
     proteinPer100g: 7.1,
-    caloriePer100g: 365, // TODO Noom disagrees - because this is raw?
+    caloriePer100g: 365,
   },
   {
     value: "wheatBread",
