@@ -11,12 +11,20 @@ import optimize from "./optimizer";
 
 const meatOptions = [
   {
-    value: "chickenBreast",
-    label: "Chicken Breast",
+    value: "chickenBreastWithSkin",
+    label: "Chicken Breast (with skin)",
     source:
       "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_breast%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
     proteinPer100g: 21,
     caloriePer100g: 172,
+  },
+  {
+    value: "chickenBreastWithoutSkin",
+    label: "Chicken Breast (without skin)",
+    source:
+      "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_only%2C_boneless%2C_skinless%2C_breast%2C_broiler_or_fryers_nutritional_value.html?size=100%20g",
+    proteinPer100g: 23,
+    caloriePer100g: 120,
   },
   {
     value: "chickenThighWithSkin",
@@ -233,7 +241,7 @@ const veggieOptions = [
   },
   {
     value: "edamamePrepared",
-    label: "Edamame (prepared",
+    label: "Edamame (prepared)",
     source:
       "https://www.nutritionvalue.org/Edamame%2C_prepared%2C_frozen_nutritional_value.html",
     proteinPer100g: 18,
@@ -527,6 +535,8 @@ function App() {
           onChange={setSelectedOption}
           options={[...meatOptions, ...veggieOptions]}
           isSearchable={true}
+          // TODO make it mobile friendly
+          // TODO display the whole table and make it sortable
           placeholder="Ingredient calorie & protein"
         />
         {selectedOption && (
@@ -604,6 +614,7 @@ function App() {
         "Meats" (aka protein source):
         <Select
           className="requirement-dropdown"
+          // TODO select all
           defaultValue={selectedMeatOptions}
           value={selectedMeatOptions}
           onChange={setSelectedMeatOptions}
