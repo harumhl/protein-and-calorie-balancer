@@ -389,6 +389,78 @@ const veggieOptions = [
     caloriePer100g: 152,
   },
   {
+    value: "spinach",
+    label: "Spinach",
+    source:
+      "https://www.nutritionvalue.org/Spinach%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.9,
+    caloriePer100g: 23,
+  },
+  {
+    value: "cucumber",
+    label: "Cucumber",
+    source:
+      "https://www.nutritionvalue.org/Cucumber%2C_raw%2C_with_peel_nutritional_value.html?size=100%20g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 15,
+  },
+  {
+    value: "pea",
+    label: "Pea",
+    source:
+      "https://www.nutritionvalue.org/Peas%2C_raw%2C_green_nutritional_value.html?size=100%20g",
+    proteinPer100g: 5.4,
+    caloriePer100g: 81,
+  },
+  {
+    value: "squashOrZucchini",
+    label: "Squash/Zucchini",
+    source:
+      "https://www.nutritionvalue.org/Squash%2C_raw%2C_baby%2C_zucchini_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.7,
+    caloriePer100g: 21,
+  },
+  {
+    value: "kale",
+    label: "Kale",
+    source:
+      "https://www.nutritionvalue.org/Kale%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.9,
+    caloriePer100g: 35,
+  },
+  {
+    value: "cauliflower",
+    label: "Cauliflower",
+    source:
+      "https://www.nutritionvalue.org/Cauliflower%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.9,
+    caloriePer100g: 25,
+  },
+  {
+    value: "brusselsSprout",
+    label: "Brussels sprout",
+    source:
+      "https://www.nutritionvalue.org/Brussels_sprouts%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 3.4,
+    caloriePer100g: 43,
+  },
+  {
+    value: "broccoli",
+    label: "Broccoli",
+    source:
+      "https://www.nutritionvalue.org/Broccoli%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.8,
+    caloriePer100g: 34,
+  },
+  {
+    value: "tomato",
+    label: "Tomato",
+    source:
+      "https://www.nutritionvalue.org/Tomatoes%2C_raw%2C_orange_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.2,
+    caloriePer100g: 16,
+  },
+  {
     value: "garlic",
     label: "Garlic",
     source:
@@ -428,6 +500,118 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Apples%2C_with_skin%2C_raw_nutritional_value.html?size=100%20g",
     proteinPer100g: 0.3,
     caloriePer100g: 52,
+  },
+  {
+    value: "date",
+    label: "Date",
+    source:
+      "https://www.nutritionvalue.org/Date_62110100_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.5,
+    caloriePer100g: 282,
+  },
+  {
+    value: "fig",
+    label: "Fig",
+    source:
+      "https://www.nutritionvalue.org/Figs%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 74,
+  },
+  {
+    value: "cherry",
+    label: "Cherry",
+    source:
+      "https://www.nutritionvalue.org/Cherries%2C_raw%2C_sweet_nutritional_value.html?size=100%20g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 63,
+  },
+  {
+    value: "persimmon",
+    label: "Persimmon",
+    source:
+      "https://www.nutritionvalue.org/Persimmon%2C_raw_63139010_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.6,
+    caloriePer100g: 70,
+  },
+  {
+    value: "blueberry",
+    label: "Blueberry",
+    source:
+      "https://www.nutritionvalue.org/Blueberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 57,
+  },
+  {
+    value: "blackberry",
+    label: "Blackberry",
+    source:
+      "https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.4,
+    caloriePer100g: 43,
+  },
+  {
+    value: "cantaloupe",
+    label: "Cantaloupe",
+    source:
+      "https://www.nutritionvalue.org/Melons%2C_raw%2C_cantaloupe_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 34,
+  },
+  {
+    value: "strawberry",
+    label: "Strawberry",
+    source:
+      "https://www.nutritionvalue.org/Strawberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 32,
+  },
+  {
+    value: "pineapple",
+    label: "Pineapple",
+    source:
+      "https://www.nutritionvalue.org/Pineapple%2C_all_varieties%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.5,
+    caloriePer100g: 50,
+  },
+  {
+    value: "tangerine",
+    label: "Tangerine (or mandarin)",
+    source:
+      "https://www.nutritionvalue.org/Tangerines%2C_raw%2C_%28mandarin_oranges%29_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 53,
+  },
+  {
+    value: "orange",
+    label: "Orange",
+    source:
+      "https://www.nutritionvalue.org/Oranges%2C_navels%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.9,
+    caloriePer100g: 49,
+  },
+  {
+    value: "mango",
+    label: "Mango",
+    source:
+      "https://www.nutritionvalue.org/Mangos%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 60,
+  },
+  {
+    value: "kiwi",
+    label: "Kiwi",
+    source:
+      "https://www.nutritionvalue.org/Kiwi_fruit%2C_raw_63126500_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 58,
+  },
+  {
+    value: "grape",
+    label: "Grape",
+    source:
+      "https://www.nutritionvalue.org/Grapes%2C_raw%2C_red_or_green_%28European_type%2C_such_as_Thompson_seedless%29_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 69,
   },
   // Grains
   {

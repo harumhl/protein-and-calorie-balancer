@@ -54,6 +54,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 In the order of priorities:
 
 - rice caloriePer100g (compare with Noom)
+- Data tab: Weight per 1g of protein
 - custom ingredients (enter protein and calorie per unit (e.g. gram). Select unit (e.g. gram). over 20g of protein per 100g of food is automatically considered meat?)
 - handle custom ingredients in import and export
 - ability to partially clear out the export-in-localStorage (e.g. remove requirement selection while keeping custom ingredients)
