@@ -453,8 +453,16 @@ const veggieOptions = [
     caloriePer100g: 34,
   },
   {
+    value: "bellPeppers",
+    label: "Bell Peppers",
+    source:
+      "https://www.nutritionvalue.org/Sliced_bell_peppers_574612_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.9,
+    caloriePer100g: 26,
+  },
+  {
     value: "tomato",
-    label: "Tomato",
+    label: "Tomato (and cherry tomato)",
     source:
       "https://www.nutritionvalue.org/Tomatoes%2C_raw%2C_orange_nutritional_value.html?size=100+g",
     proteinPer100g: 1.2,
@@ -655,6 +663,14 @@ const veggieOptions = [
     proteinPer100g: 32,
     caloriePer100g: 553,
   },
+  {
+    value: "quinoaUncooked",
+    label: "Quinoa (uncooked)",
+    source:
+      "https://www.nutritionvalue.org/Quinoa%2C_uncooked_nutritional_value.html?size=100%20g",
+    proteinPer100g: 14,
+    caloriePer100g: 368,
+  },
   // Powder
   {
     value: "onionPowder",
@@ -720,6 +736,14 @@ const veggieOptions = [
       "https://www.nutritionvalue.org/Sauce%2C_sriracha%2C_hot_chile_nutritional_value.html?size=100+g",
     proteinPer100g: 1.9,
     caloriePer100g: 93,
+  },
+  {
+    value: "soySauce",
+    label: "Soy Sauce",
+    source:
+      "https://www.nutritionvalue.org/Soy_sauce_41420300_nutritional_value.html?size=100+g",
+    proteinPer100g: 8.1,
+    caloriePer100g: 53,
   },
   {
     value: "salsa",
