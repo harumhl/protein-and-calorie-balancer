@@ -91,6 +91,7 @@ function handleExportImport(
 function Calculate() {
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
+  const [micronutrientPercent, setMicronutrientPercent] = useState(false);
   const [selectedMeatOptions, setSelectedMeatOptions] = useState([]);
   const [selectedVeggieOptions, setSelectedVeggieOptions] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
@@ -178,6 +179,22 @@ function Calculate() {
       </div>
       <div>
         <h2>Optional Requirements</h2>
+        Percent of Micronutrients:
+        <input
+          type="number"
+          value={micronutrientPercent}
+          onChange={(e) => {
+            const value =
+              typeof e.target.value === "string"
+                ? parseFloat(e.target.value)
+                : e.target.value;
+            if (value >= 0 && value <= 100) {
+              setMicronutrientPercent(value);
+            }
+          }}
+        />
+        %
+        <br />
         <header>
           Any requirement on how much you can eat or how much you have to eat?
         </header>
@@ -262,7 +279,10 @@ function Calculate() {
                   minProtein,
                   maxCalorie,
                   selectedMeatOptions,
-                  selectedVeggieOptions
+                  selectedVeggieOptions,
+                  {
+                    micronutrientPercent,
+                  }
                 );
               } catch (e) {
                 console.error(e);
