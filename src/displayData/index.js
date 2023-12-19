@@ -135,7 +135,7 @@ function DisplayData() {
               <>
                 {Object.keys(recommendedMicroNutrients).map((nutrient) => {
                   // TODO sort
-                  return <td className="table-border pointer">{nutrient}</td>;
+                  return <td className="table-border">{nutrient}</td>;
                 })}
               </>
             )}
