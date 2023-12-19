@@ -147,6 +147,7 @@ function Calculate() {
         <h2>Requirements</h2>
         <header>What ingredients can be included in your diet?</header>
         "Meats" (aka protein source):
+        <button onClick={() => setSelectedMeatOptions(meatOptions)}>All</button>
         <Select
           className="requirement-dropdown"
           defaultValue={selectedMeatOptions}
@@ -158,6 +159,7 @@ function Calculate() {
         />
         <br />
         "Veggies" (aka others):
+        <button onClick={() => setSelectedVeggieOptions(veggieOptions)}>All</button>
         <Select
           className="requirement-dropdown"
           defaultValue={selectedVeggieOptions}
