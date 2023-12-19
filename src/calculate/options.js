@@ -802,4 +802,38 @@ const optionalRequirementOptions = [
   },
 ];
 
+const recommendedMicroNutrients = {
+  // source: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
+  // in grams
+  vitaminA: 0.0009,
+  vitaminB1: 0.0012, // Thiamin
+  vitaminB2: 0.0013, // Riboflavin
+  vitaminB3: 0.016, // Niacin
+  vitaminB5: 0.005, // Pantothenic Acid
+  vitaminB6: 0.0017,
+  vitaminB7: 0.00003, // Biotin
+  vitaminB9: 0.0004, // Folate (aka Folic Acid)
+  vitaminB12: 0.0000024,
+  vitaminC: 0.09,
+  vitaminD: 0.00002,
+  vitaminE: 0.015,
+  vitaminK: 0.00012,
+  calcium: 1.3,
+  chloride: 2.3,
+  choline: 0.55,
+  chromium: 0.000035,
+  copper: 0.0009,
+  fiber: 28,
+  iodine: 0.00015,
+  iron: 0.018,
+  magnesium: 0.42,
+  manganese: 0.0023,
+  molybdenum: 0.000045,
+  phosphorus: 1.25,
+  potassium: 4.7,
+  selenium: 0.000055,
+  sodium: 2.3,
+  zinc: 0.011,
+};
+
 export { meatOptions, veggieOptions, optionalRequirementOptions };
