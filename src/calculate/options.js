@@ -864,4 +864,4 @@ const recommendedMicroNutrients = {
   zinc: 0.011,
 };
 
-export { meatOptions, veggieOptions, optionalRequirementOptions };
+export { meatOptions, veggieOptions, optionalRequirementOptions, recommendedMicroNutrients };

@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 import "./index.css";
-import { meatOptions, veggieOptions } from "./../calculate/options";
+import {
+  meatOptions,
+  veggieOptions,
+  recommendedMicroNutrients,
+} from "./../calculate/options";
 
 function addCaloriePerProteinToOptions(options) {
   return options.map((option) => {
@@ -65,6 +69,7 @@ function DisplayData() {
     addCaloriePerProteinToOptions([...meatOptions, ...veggieOptions])
   );
   const [selectedSort, setSelectedSort] = useState({});
+  const [displayMicroNutrients, setDisplayMicroNutrients] = useState(false);
 
   const preSortedOptions = {
     label: sortOptions(sortedOptions, "label"),
@@ -81,70 +86,102 @@ function DisplayData() {
   };
 
   return (
-    <table
-      className="table-horizontally-centered"
-      style={{
-        borderCollapse: "collapse",
-        textAlign: "center",
-      }}
-    >
-      <thead>
-        <tr>
-          <td
-            className="table-border"
-            style={{ cursor: "pointer" }}
-            onClick={() => selectSort("label", paramsForSortSelection)}
-          >
-            Name
-          </td>
-          <td
-            className="table-border pointer"
-            onClick={() => selectSort("caloriePer100g", paramsForSortSelection)}
-          >
-            Calorie per 100g (kcal)
-          </td>
-          <td
-            className="table-border pointer"
-            onClick={() => selectSort("proteinPer100g", paramsForSortSelection)}
-          >
-            Protein per 100g (g)
-          </td>
-          <td
-            className="table-border pointer"
-            onClick={() =>
-              selectSort("caloriePerProtein", paramsForSortSelection)
-            }
-          >
-            Calorie per 1g of protein (kcal)
-          </td>
-          <td className="table-border">source</td>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedOptions.map((option) => {
-          const {
-            label,
-            caloriePer100g,
-            proteinPer100g,
-            caloriePerProtein,
-            source,
-          } = option;
-          return (
-            <tr key={option.value}>
-              <td className="table-border">{label}</td>
-              <td className="table-border">{caloriePer100g}</td>
-              <td className="table-border">{proteinPer100g}</td>
-              <td className="table-border">{caloriePerProtein}</td>
-              <td className="table-border">
-                <a href={`${source}`} target="_blank" rel="noopener noreferrer">
-                  link
-                </a>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      <button onClick={() => setDisplayMicroNutrients(!displayMicroNutrients)}>
+        Display Micronutrients
+      </button>
+      <table
+        className="table-horizontally-centered"
+        style={{
+          borderCollapse: "collapse",
+          textAlign: "center",
+        }}
+      >
+        <thead>
+          <tr>
+            <td
+              className="table-border"
+              style={{ cursor: "pointer" }}
+              onClick={() => selectSort("label", paramsForSortSelection)}
+            >
+              Name
+            </td>
+            <td
+              className="table-border pointer"
+              onClick={() =>
+                selectSort("caloriePer100g", paramsForSortSelection)
+              }
+            >
+              Calorie per 100g (kcal)
+            </td>
+            <td
+              className="table-border pointer"
+              onClick={() =>
+                selectSort("proteinPer100g", paramsForSortSelection)
+              }
+            >
+              Protein per 100g (g)
+            </td>
+            <td
+              className="table-border pointer"
+              onClick={() =>
+                selectSort("caloriePerProtein", paramsForSortSelection)
+              }
+            >
+              Calorie per 1g of protein (kcal)
+            </td>
+            <td className="table-border">source</td>
+            {displayMicroNutrients && (
+              <>
+                {Object.keys(recommendedMicroNutrients).map((nutrient) => {
+                  // TODO sort
+                  return <td className="table-border pointer">{nutrient}</td>;
+                })}
+              </>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {sortedOptions.map((option) => {
+            const {
+              label,
+              caloriePer100g,
+              proteinPer100g,
+              caloriePerProtein,
+              source,
+            } = option;
+            return (
+              <tr key={option.value}>
+                <td className="table-border">{label}</td>
+                <td className="table-border">{caloriePer100g}</td>
+                <td className="table-border">{proteinPer100g}</td>
+                <td className="table-border">{caloriePerProtein}</td>
+                <td className="table-border">
+                  <a
+                    href={`${source}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    link
+                  </a>
+                </td>
+                {displayMicroNutrients && (
+                  <>
+                    {Object.keys(recommendedMicroNutrients).map((nutrient) => {
+                      return (
+                        <td className="table-border">
+                          {option[`${nutrient}Per100g`]}
+                        </td>
+                      );
+                    })}
+                  </>
+                )}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 }
 
