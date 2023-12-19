@@ -11,6 +11,7 @@ import {
   meatOptions,
   veggieOptions,
   optionalRequirementOptions,
+  recommendedMicroNutrients,
 } from "./options";
 
 function handleExportImport(
@@ -159,7 +160,9 @@ function Calculate() {
         />
         <br />
         "Veggies" (aka others):
-        <button onClick={() => setSelectedVeggieOptions(veggieOptions)}>All</button>
+        <button onClick={() => setSelectedVeggieOptions(veggieOptions)}>
+          All
+        </button>
         <Select
           className="requirement-dropdown"
           defaultValue={selectedVeggieOptions}
@@ -190,9 +193,7 @@ function Calculate() {
               typeof e.target.value === "string"
                 ? parseFloat(e.target.value)
                 : e.target.value;
-            if (value >= 0 && value <= 100) {
-              setMicronutrientPercent(value);
-            }
+            setMicronutrientPercent(value); // TODO only allow 0~100?
           }}
         />
         %
@@ -303,6 +304,34 @@ function Calculate() {
                     : acc;
                 }, 0)
               );
+              result = {
+                ...result,
+                ...Object.keys(recommendedMicroNutrients).reduce(
+                  // Get micronutrient in %
+                  (acc, currNutrientKey) => {
+                    const nutrientInGram = [
+                      ...meatOptions,
+                      ...veggieOptions,
+                    ].reduce((acc2, currOption) => {
+                      return result[currOption.value] &&
+                        currOption[`${currNutrientKey}Per100g`]
+                        ? acc2 +
+                            (currOption[`${currNutrientKey}Per100g`] / 100.0) *
+                              result[currOption.value]
+                        : acc2;
+                    }, 0);
+                    return {
+                      ...acc,
+                      [currNutrientKey]: Math.round(
+                        (nutrientInGram /
+                          recommendedMicroNutrients[currNutrientKey]) *
+                          100
+                      ),
+                    };
+                  },
+                  {}
+                ),
+              };
               setRunResult(result);
             }}
           >
@@ -317,6 +346,18 @@ function Calculate() {
                 <ul className="result-list">
                   <li>Total Calorie: {runResult.calorie}kcal</li>
                   <li>Total Protein: {runResult.protein}g</li>
+                  {micronutrientPercent > 0 &&
+                    micronutrientPercent <= 100 &&
+                    Object.keys(recommendedMicroNutrients).map(
+                      (nutrientKey) => {
+                        console.log(nutrientKey);
+                        return (
+                          <li>
+                            {nutrientKey}: {runResult[nutrientKey]}%
+                          </li>
+                        );
+                      }
+                    )}
                 </ul>
                 <ul className="result-list">
                   {[...meatOptions, ...veggieOptions].map((option) => {
