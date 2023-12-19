@@ -350,7 +350,6 @@ function Calculate() {
                     micronutrientPercent <= 100 &&
                     Object.keys(recommendedMicroNutrients).map(
                       (nutrientKey) => {
-                        console.log(nutrientKey);
                         return (
                           <li>
                             {nutrientKey}: {runResult[nutrientKey]}%
