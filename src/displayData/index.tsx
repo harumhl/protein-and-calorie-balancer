@@ -14,7 +14,9 @@ function addCaloriePerProteinToOptions(
     const { caloriePer100g, proteinPer100g } = option;
     // two decimal places
     const caloriePerProtein =
-      Math.round((caloriePer100g / proteinPer100g) * 100) / 100;
+      proteinPer100g > 0
+        ? Math.round((caloriePer100g / proteinPer100g) * 100) / 100
+        : undefined;
     return { ...option, caloriePerProtein };
   });
 }

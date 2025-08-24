@@ -105,7 +105,7 @@ const Bmr = ({
           type="number"
           value={age}
           onChange={(e) => setAge(Number(e.target.value))}
-          style={{ width: "50px" }}
+          style={{ width: "60px" }}
         />
         {" years old"}
       </div>
@@ -242,7 +242,7 @@ const Maintenance = ({
         </label>
         <br />
         <div>
-          Suggested calorie intake to maintain essential bodily functions:{" "}
+          Suggested calorie intake to maintain curent weight:{" "}
           <input
             disabled
             value={maintenanceCalorie}
@@ -255,13 +255,13 @@ const Maintenance = ({
           <input
             disabled
             value={maintenanceProteinLowEnd}
-            style={{ width: "35px" }}
+            style={{ width: "50px" }}
           />
           {" - "}
           <input
             disabled
             value={maintenanceProteinHighEnd}
-            style={{ width: "35px" }}
+            style={{ width: "50px" }}
           />
           {" g/day"}
         </div>
@@ -270,13 +270,13 @@ const Maintenance = ({
           <input
             disabled
             value={Math.round(toKg(weightInPounds) * 1.6)}
-            style={{ width: "42px" }}
+            style={{ width: "50px" }}
           />
           {" - "}
           <input
             disabled
             value={Math.round(toKg(weightInPounds) * 2.2)}
-            style={{ width: "42px" }}
+            style={{ width: "50px" }}
           />
           {" g/day"}
         </div>

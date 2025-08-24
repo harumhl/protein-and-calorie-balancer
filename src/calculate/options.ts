@@ -1,40 +1,47 @@
+export type MicroNutrient = {
+  vitaminA: number;
+  vitaminB1: number; // Thiamin
+  vitaminB2: number; // Riboflavin
+  vitaminB3: number; // Niacin
+  vitaminB5: number; // Pantothenic Acid
+  vitaminB6: number;
+  vitaminB7: number; // Biotin
+  vitaminB9: number; // Folate (aka Folic Acid)
+  vitaminB12: number;
+  vitaminC: number;
+  vitaminD: number;
+  vitaminE: number;
+  vitaminK: number;
+  calcium: number;
+  chloride: number;
+  choline: number;
+  chromium: number;
+  copper: number;
+  fiber: number;
+  iodine: number;
+  iron: number;
+  magnesium: number;
+  manganese: number;
+  molybdenum: number;
+  phosphorus: number;
+  potassium: number;
+  selenium: number;
+  sodium: number;
+  zinc: number;
+};
+
+type AddSuffix<T, Suffix extends string> = {
+  [K in keyof T as `${string & K}${Suffix}`]?: T[K];
+};
+
 export type Option = {
   value: string;
   label: string;
   source: string;
-
-  // TODO derive below using MicroNutrient type
   proteinPer100g: number;
   caloriePer100g: number;
-  vitaminAPer100g?: number;
-  vitaminB1Per100g?: number;
-  vitaminB2Per100g?: number;
-  vitaminB3Per100g?: number;
-  vitaminB5Per100g?: number;
-  vitaminB6Per100g?: number;
-  vitaminB7Per100g?: number;
-  vitaminB9Per100g?: number;
-  vitaminB12Per100g?: number;
-  vitaminCPer100g?: number;
-  vitaminDPer100g?: number;
-  vitaminEPer100g?: number;
-  vitaminKPer100g?: number;
-  calciumPer100g?: number;
-  cholinePer100g?: number;
-  chromiumPer100g?: number;
-  copperPer100g?: number;
-  fiberPer100g?: number;
-  iodinePer100g?: number;
-  ironPer100g?: number;
-  magnesiumPer100g?: number;
-  manganesePer100g?: number;
-  molybdenumPer100g?: number;
-  phosphorusPer100g?: number;
-  potassiumPer100g?: number;
-  seleniumPer100g?: number;
-  sodiumPer100g?: number;
-  zincPer100g?: number;
-};
+  fiberPer100g: number | null; // null means unknown
+} & AddSuffix<Omit<MicroNutrient, "fiber">, "Per100g">; // vitaminAPer100g, ironPer100g, etc.
 
 export const meatOptions: Option[] = [
   {
@@ -44,6 +51,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_breast%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
     proteinPer100g: 21,
     caloriePer100g: 172,
+    fiberPer100g: 0,
   },
   {
     value: "chickenBreastWithoutSkin",
@@ -52,6 +60,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_only%2C_boneless%2C_skinless%2C_breast%2C_broiler_or_fryers_nutritional_value.html?size=100%20g",
     proteinPer100g: 23,
     caloriePer100g: 120,
+    fiberPer100g: 0,
   },
   {
     value: "chickenThighWithSkin",
@@ -60,6 +69,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Chicken%2C_raw%2C_meat_and_skin%2C_thigh%2C_broilers_or_fryers_nutritional_value.html?size=100+g",
     proteinPer100g: 17,
     caloriePer100g: 221,
+    fiberPer100g: 0,
   },
   {
     value: "chickenThighWithoutSkin",
@@ -104,6 +114,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Turkey%2C_raw%2C_meat_and_skin%2C_breast%2C_all_classes_nutritional_value.html?size=100+g",
     proteinPer100g: 22,
     caloriePer100g: 157,
+    fiberPer100g: 0,
   },
   {
     value: "groundPork",
@@ -112,6 +123,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_ground%2C_fresh_nutritional_value.html?size=100%20g",
     proteinPer100g: 17,
     caloriePer100g: 263,
+    fiberPer100g: 0,
   },
   {
     value: "porkSirloin",
@@ -120,6 +132,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_bone-in%2C_sirloin_%28chops_or_roasts%29%2C_loin%2C_fresh_nutritional_value.html",
     proteinPer100g: 23,
     caloriePer100g: 190,
+    fiberPer100g: 0,
   },
   {
     value: "porkLoin",
@@ -128,6 +141,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_whole%2C_loin%2C_fresh_nutritional_value.html",
     proteinPer100g: 22,
     caloriePer100g: 224,
+    fiberPer100g: 0,
   },
   {
     value: "porkChop",
@@ -136,6 +150,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_separable_lean_and_fat%2C_bone-in%2C_center_loin_%28chops%29%2C_loin%2C_fresh_nutritional_value.html",
     proteinPer100g: 23,
     caloriePer100g: 192,
+    fiberPer100g: 0,
   },
   {
     value: "porkTenderloin",
@@ -180,6 +195,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Pork%2C_raw%2C_belly%2C_fresh_nutritional_value.html?size=100+g",
     proteinPer100g: 9.3,
     caloriePer100g: 518,
+    fiberPer100g: 0,
   },
   {
     value: "italianPorkSausage",
@@ -188,6 +204,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Sausage%2C_raw%2C_mild%2C_pork%2C_Italian_nutritional_value.html?size=100+g",
     proteinPer100g: 14,
     caloriePer100g: 290,
+    fiberPer100g: 0,
   },
   {
     value: "pinkSalmon",
@@ -342,6 +359,7 @@ export const meatOptions: Option[] = [
     caloriePer100g: 71,
     vitaminCPer100g: 0,
     calciumPer100g: 0.036,
+    fiberPer100g: 0,
     ironPer100g: 0.00064,
     sodiumPer100g: 0.134,
   },
@@ -352,6 +370,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Egg%2C_fresh%2C_raw%2C_whole_nutritional_value.html?size=100+g",
     proteinPer100g: 13,
     caloriePer100g: 143,
+    fiberPer100g: 0,
   },
   {
     value: "eggWhite",
@@ -360,6 +379,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Egg%2C_fresh%2C_raw%2C_white_nutritional_value.html?size=100%20g",
     proteinPer100g: 11,
     caloriePer100g: 52,
+    fiberPer100g: 0,
   },
   {
     value: "tofu",
@@ -368,6 +388,7 @@ export const meatOptions: Option[] = [
       "https://www.nutritionvalue.org/Tofu%2C_prepared_with_calcium_sulfate%2C_regular%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 8.1,
     caloriePer100g: 76,
+    fiberPer100g: 0.3,
   },
 ];
 
@@ -555,6 +576,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Oil%2C_salad_or_cooking%2C_olive_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 884,
+    fiberPer100g: 0,
   },
   {
     value: "butter",
@@ -563,6 +585,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Butter%2C_without_salt_nutritional_value.html?size=100+g",
     proteinPer100g: 0.9,
     caloriePer100g: 717,
+    fiberPer100g: 0,
   },
   {
     value: "ghee",
@@ -571,6 +594,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Butter%2C_Clarified_butter_%28ghee%29_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 900,
+    fiberPer100g: 0,
   },
   {
     value: "creamCheese",
@@ -579,6 +603,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cheese%2C_cream_nutritional_value.html?size=100+g",
     proteinPer100g: 6.2,
     caloriePer100g: 350,
+    fiberPer100g: 0,
   },
   {
     value: "cottageCheese",
@@ -587,6 +612,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cottage_cheese_1028783_nutritional_value.html?size=100+g",
     proteinPer100g: 9.7,
     caloriePer100g: 88,
+    fiberPer100g: 0,
   },
   {
     value: "fetaCheese",
@@ -595,6 +621,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cheese%2C_Feta_14104400_nutritional_value.html?size=100+g",
     proteinPer100g: 14,
     caloriePer100g: 265,
+    fiberPer100g: 0,
   },
   {
     value: "cheddarCheese",
@@ -603,6 +630,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cheese%2C_cheddar_nutritional_value.html?size=100+g",
     proteinPer100g: 23,
     caloriePer100g: 403,
+    fiberPer100g: 0,
   },
   {
     value: "americanCheese",
@@ -611,6 +639,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cheese%2C_restaurant%2C_American_747429_nutritional_value.html?size=100+g",
     proteinPer100g: 18,
     caloriePer100g: 375,
+    fiberPer100g: null,
   },
   {
     value: "mozzarellaCheese",
@@ -619,6 +648,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cheese%2C_whole_milk%2C_mozzarella_nutritional_value.html?size=100+g",
     proteinPer100g: 22,
     caloriePer100g: 299,
+    fiberPer100g: 0,
   },
   {
     value: "greekYogurt",
@@ -627,6 +657,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Yogurt%2C_whole_milk%2C_plain%2C_Greek_nutritional_value.html?size=100+g",
     proteinPer100g: 9,
     caloriePer100g: 97,
+    fiberPer100g: 0,
   },
   {
     value: "milk",
@@ -635,6 +666,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Whole_milk_735370_nutritional_value.html?size=100+g",
     proteinPer100g: 3.3,
     caloriePer100g: 62,
+    fiberPer100g: 0,
   },
   {
     value: "avocado",
@@ -643,6 +675,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Avocado%2C_raw_63105010_nutritional_value.html?size=100+g",
     proteinPer100g: 2,
     caloriePer100g: 160,
+    fiberPer100g: 6.7,
   },
   // Veggies
   {
@@ -1115,6 +1148,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Vinegar%2C_balsamic_nutritional_value.html?size=100+g",
     proteinPer100g: 0.5,
     caloriePer100g: 88,
+    fiberPer100g: null,
   },
 ];
 
@@ -1132,38 +1166,6 @@ export const optionalRequirementOptions = [
     label: "Minimum",
   },
 ];
-
-export type MicroNutrient = {
-  vitaminA: number;
-  vitaminB1: number; // Thiamin
-  vitaminB2: number; // Riboflavin
-  vitaminB3: number; // Niacin
-  vitaminB5: number; // Pantothenic Acid
-  vitaminB6: number;
-  vitaminB7: number; // Biotin
-  vitaminB9: number; // Folate (aka Folic Acid)
-  vitaminB12: number;
-  vitaminC: number;
-  vitaminD: number;
-  vitaminE: number;
-  vitaminK: number;
-  calcium: number;
-  chloride: number;
-  choline: number;
-  chromium: number;
-  copper: number;
-  fiber: number;
-  iodine: number;
-  iron: number;
-  magnesium: number;
-  manganese: number;
-  molybdenum: number;
-  phosphorus: number;
-  potassium: number;
-  selenium: number;
-  sodium: number;
-  zinc: number;
-};
 
 export const recommendedMicroNutrients: MicroNutrient = {
   // source: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
