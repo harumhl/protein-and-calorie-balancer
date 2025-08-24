@@ -2,6 +2,8 @@ export type Option = {
   value: string;
   label: string;
   source: string;
+
+  // TODO derive below using MicroNutrient type
   proteinPer100g: number;
   caloriePer100g: number;
   vitaminAPer100g?: number;
@@ -369,6 +371,181 @@ export const meatOptions: Option[] = [
   },
 ];
 
+const fruitOptions: Option[] = [
+  // Fruits
+  {
+    value: "watermelon",
+    label: "Watermelon",
+    source:
+      "https://www.nutritionvalue.org/Watermelon%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.6,
+    caloriePer100g: 30,
+    fiberPer100g: 0.4,
+  },
+  {
+    value: "banana",
+    label: "Banana",
+    source:
+      "https://www.nutritionvalue.org/Bananas%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 89,
+    fiberPer100g: 2.6,
+  },
+  {
+    value: "raspberry",
+    label: "Raspberry",
+    source:
+      "https://www.nutritionvalue.org/Raspberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.2,
+    caloriePer100g: 52,
+    fiberPer100g: 6.5,
+  },
+  {
+    value: "appleWithoutSkin",
+    label: "Apple (without skin)",
+    source:
+      "https://www.nutritionvalue.org/Apples%2C_without_skin%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.3,
+    caloriePer100g: 48,
+    fiberPer100g: 1.3,
+  },
+  {
+    value: "appleWithSkin",
+    label: "Apple (with skin)",
+    source:
+      "https://www.nutritionvalue.org/Apples%2C_with_skin%2C_raw_nutritional_value.html?size=100%20g",
+    proteinPer100g: 0.3,
+    caloriePer100g: 52,
+    fiberPer100g: 2.4,
+  },
+  {
+    value: "date",
+    label: "Date",
+    source:
+      "https://www.nutritionvalue.org/Date_62110100_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.5,
+    caloriePer100g: 282,
+    fiberPer100g: 8,
+  },
+  {
+    value: "fig",
+    label: "Fig",
+    source:
+      "https://www.nutritionvalue.org/Figs%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 74,
+    fiberPer100g: 2.9,
+  },
+  {
+    value: "cherry",
+    label: "Cherry",
+    source:
+      "https://www.nutritionvalue.org/Cherries%2C_raw%2C_sweet_nutritional_value.html?size=100%20g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 63,
+    fiberPer100g: 2.1,
+  },
+  {
+    value: "persimmon",
+    label: "Persimmon",
+    source:
+      "https://www.nutritionvalue.org/Persimmon%2C_raw_63139010_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.6,
+    caloriePer100g: 70,
+    fiberPer100g: 3.6,
+  },
+  {
+    value: "blueberry",
+    label: "Blueberry",
+    source:
+      "https://www.nutritionvalue.org/Blueberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 57,
+    fiberPer100g: 2.4,
+  },
+  {
+    value: "blackberry",
+    label: "Blackberry",
+    source:
+      "https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.4,
+    caloriePer100g: 43,
+    fiberPer100g: 5.3,
+  },
+  {
+    value: "cantaloupe",
+    label: "Cantaloupe",
+    source:
+      "https://www.nutritionvalue.org/Melons%2C_raw%2C_cantaloupe_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 34,
+    fiberPer100g: 0.9,
+  },
+  {
+    value: "strawberry",
+    label: "Strawberry",
+    source:
+      "https://www.nutritionvalue.org/Strawberries%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 32,
+    fiberPer100g: 2,
+  },
+  {
+    value: "pineapple",
+    label: "Pineapple",
+    source:
+      "https://www.nutritionvalue.org/Pineapple%2C_all_varieties%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.5,
+    caloriePer100g: 50,
+    fiberPer100g: 1.4,
+  },
+  {
+    value: "tangerine",
+    label: "Tangerine (or mandarin)",
+    source:
+      "https://www.nutritionvalue.org/Tangerines%2C_raw%2C_%28mandarin_oranges%29_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 53,
+    fiberPer100g: 1.8,
+  },
+  {
+    value: "orange",
+    label: "Orange",
+    source:
+      "https://www.nutritionvalue.org/Oranges%2C_navels%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.9,
+    caloriePer100g: 49,
+    fiberPer100g: 2.2,
+  },
+  {
+    value: "mango",
+    label: "Mango",
+    source:
+      "https://www.nutritionvalue.org/Mangos%2C_raw_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.8,
+    caloriePer100g: 60,
+    fiberPer100g: 1.6,
+  },
+  {
+    value: "kiwi",
+    label: "Kiwi",
+    source:
+      "https://www.nutritionvalue.org/Kiwi_fruit%2C_raw_63126500_nutritional_value.html?size=100+g",
+    proteinPer100g: 1.1,
+    caloriePer100g: 58,
+    fiberPer100g: 3,
+  },
+  {
+    value: "grape",
+    label: "Grape",
+    source:
+      "https://www.nutritionvalue.org/Grapes%2C_raw%2C_red_or_green_%28European_type%2C_such_as_Thompson_seedless%29_nutritional_value.html?size=100+g",
+    proteinPer100g: 0.7,
+    caloriePer100g: 69,
+    fiberPer100g: 0.9,
+  },
+];
+
 export const veggieOptions: Option[] = [
   // Fatty
   {
@@ -475,6 +652,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Onions%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 1.1,
     caloriePer100g: 40,
+    fiberPer100g: 1.7,
   },
   {
     value: "carrot",
@@ -483,6 +661,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Carrots%2C_raw_nutritional_value.html?size=100%20g",
     proteinPer100g: 0.9,
     caloriePer100g: 41,
+    fiberPer100g: 2.8,
   },
   {
     value: "potato",
@@ -491,6 +670,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Potatoes%2C_raw%2C_flesh_and_skin_nutritional_value.html?size=100+g",
     proteinPer100g: 2.1,
     caloriePer100g: 77,
+    fiberPer100g: 2.1,
   },
   {
     value: "sweetPotato",
@@ -499,6 +679,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Sweet_potato%2C_unprepared%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 1.6,
     caloriePer100g: 86,
+    fiberPer100g: 3,
   },
   {
     value: "greenPeas",
@@ -507,6 +688,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Peas%2C_raw%2C_green_nutritional_value.html?size=100+g",
     proteinPer100g: 5.4,
     caloriePer100g: 81,
+    fiberPer100g: 5.7,
   },
   {
     value: "greenBeans",
@@ -515,6 +697,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Beans%2C_raw%2C_green%2C_snap_nutritional_value.html",
     proteinPer100g: 1.8,
     caloriePer100g: 31,
+    fiberPer100g: 2.7,
   },
   {
     value: "chickpea",
@@ -523,6 +706,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Chickpeas_%28garbanzo_beans%2C_bengal_gram%29%2C_raw%2C_mature_seeds_nutritional_value.html?size=100%20g",
     proteinPer100g: 20,
     caloriePer100g: 378,
+    fiberPer100g: 12,
   },
   {
     value: "edamamePrepared",
@@ -531,6 +715,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Edamame%2C_prepared%2C_frozen_nutritional_value.html",
     proteinPer100g: 18,
     caloriePer100g: 188,
+    fiberPer100g: 8.1,
   },
   {
     value: "hummus",
@@ -539,6 +724,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Hummus_554432_nutritional_value.html?size=100+g",
     proteinPer100g: 6.7,
     caloriePer100g: 167,
+    fiberPer100g: 6.7,
   },
   {
     value: "lentilsBoiled",
@@ -547,6 +733,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Lentils%2C_without_salt%2C_boiled%2C_cooked%2C_mature_seeds_nutritional_value.html?size=100+g",
     proteinPer100g: 9,
     caloriePer100g: 116,
+    fiberPer100g: 7.9,
   },
   {
     value: "cabbage",
@@ -555,6 +742,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cabbage%2C_raw_nutritional_value.html?size=100%20g",
     proteinPer100g: 1.3,
     caloriePer100g: 25,
+    fiberPer100g: 2.5,
   },
   {
     value: "redCabbage",
@@ -563,6 +751,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cabbage%2C_raw%2C_red_nutritional_value.html",
     proteinPer100g: 1.3,
     caloriePer100g: 28,
+    fiberPer100g: 1.9,
   },
   {
     value: "lettuce",
@@ -607,6 +796,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Celery%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 0.7,
     caloriePer100g: 14,
+    fiberPer100g: 1.6,
   },
   {
     value: "mushroom",
@@ -615,6 +805,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Mushrooms%2C_raw%2C_white_nutritional_value.html?size=100+g",
     proteinPer100g: 3.1,
     caloriePer100g: 22,
+    fiberPer100g: 1,
   },
   {
     value: "plantains",
@@ -623,6 +814,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Plantains%2C_raw%2C_green_nutritional_value.html?size=100+g",
     proteinPer100g: 1.3,
     caloriePer100g: 152,
+    fiberPer100g: 2.2,
   },
   {
     value: "spinach",
@@ -631,6 +823,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Spinach%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 2.9,
     caloriePer100g: 23,
+    fiberPer100g: 2.2,
   },
   {
     value: "cucumber",
@@ -675,6 +868,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Peas%2C_raw%2C_green_nutritional_value.html?size=100%20g",
     proteinPer100g: 5.4,
     caloriePer100g: 81,
+    fiberPer100g: 5.7,
   },
   {
     value: "squashOrZucchini",
@@ -683,6 +877,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Squash%2C_raw%2C_baby%2C_zucchini_nutritional_value.html?size=100+g",
     proteinPer100g: 2.7,
     caloriePer100g: 21,
+    fiberPer100g: 1.1,
   },
   {
     value: "kale",
@@ -691,6 +886,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Kale%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 2.9,
     caloriePer100g: 35,
+    fiberPer100g: 4.1,
   },
   {
     value: "cauliflower",
@@ -699,6 +895,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Cauliflower%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 1.9,
     caloriePer100g: 25,
+    fiberPer100g: 2,
   },
   {
     value: "brusselsSprout",
@@ -707,6 +904,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Brussels_sprouts%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 3.4,
     caloriePer100g: 43,
+    fiberPer100g: 3.8,
   },
   {
     value: "broccoli",
@@ -715,6 +913,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Broccoli%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 2.8,
     caloriePer100g: 34,
+    fiberPer100g: 2.6,
   },
   {
     value: "bellPeppers",
@@ -723,6 +922,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Sliced_bell_peppers_574612_nutritional_value.html?size=100+g",
     proteinPer100g: 0.9,
     caloriePer100g: 26,
+    fiberPer100g: 1.3,
   },
   {
     value: "tomato",
@@ -767,185 +967,9 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Garlic%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 6.4,
     caloriePer100g: 149,
+    fiberPer100g: 2.1,
   },
-  // Fruits
-  {
-    value: "watermelon",
-    label: "Watermelon",
-    source:
-      "https://www.nutritionvalue.org/Watermelon%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.6,
-    caloriePer100g: 30,
-  },
-  {
-    value: "banana",
-    label: "Banana",
-    source:
-      "https://www.nutritionvalue.org/Bananas%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 1.1,
-    caloriePer100g: 89,
-  },
-  {
-    value: "appleWithoutSkin",
-    label: "Apple (without skin)",
-    source:
-      "https://www.nutritionvalue.org/Apples%2C_without_skin%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.3,
-    caloriePer100g: 48,
-  },
-  {
-    value: "appleWithSkin",
-    label: "Apple (with skin)",
-    source:
-      "https://www.nutritionvalue.org/Apples%2C_with_skin%2C_raw_nutritional_value.html?size=100%20g",
-    proteinPer100g: 0.3,
-    caloriePer100g: 52,
-  },
-  {
-    value: "date",
-    label: "Date",
-    source:
-      "https://www.nutritionvalue.org/Date_62110100_nutritional_value.html?size=100+g",
-    proteinPer100g: 2.5,
-    caloriePer100g: 282,
-  },
-  {
-    value: "fig",
-    label: "Fig",
-    source:
-      "https://www.nutritionvalue.org/Figs%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.8,
-    caloriePer100g: 74,
-  },
-  {
-    value: "cherry",
-    label: "Cherry",
-    source:
-      "https://www.nutritionvalue.org/Cherries%2C_raw%2C_sweet_nutritional_value.html?size=100%20g",
-    proteinPer100g: 1.1,
-    caloriePer100g: 63,
-  },
-  {
-    value: "persimmon",
-    label: "Persimmon",
-    source:
-      "https://www.nutritionvalue.org/Persimmon%2C_raw_63139010_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.6,
-    caloriePer100g: 70,
-  },
-  {
-    value: "blueberry",
-    label: "Blueberry",
-    source:
-      "https://www.nutritionvalue.org/Blueberries%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.7,
-    caloriePer100g: 57,
-  },
-  {
-    value: "blackberry",
-    label: "Blackberry",
-    source:
-      "https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 1.4,
-    caloriePer100g: 43,
-  },
-  {
-    value: "cantaloupe",
-    label: "Cantaloupe",
-    source:
-      "https://www.nutritionvalue.org/Melons%2C_raw%2C_cantaloupe_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.8,
-    caloriePer100g: 34,
-  },
-  {
-    value: "strawberry",
-    label: "Strawberry",
-    source:
-      "https://www.nutritionvalue.org/Strawberries%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.7,
-    caloriePer100g: 32,
-  },
-  {
-    value: "pineapple",
-    label: "Pineapple",
-    source:
-      "https://www.nutritionvalue.org/Pineapple%2C_all_varieties%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.5,
-    caloriePer100g: 50,
-  },
-  {
-    value: "tangerine",
-    label: "Tangerine (or mandarin)",
-    source:
-      "https://www.nutritionvalue.org/Tangerines%2C_raw%2C_%28mandarin_oranges%29_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.8,
-    caloriePer100g: 53,
-  },
-  {
-    value: "orange",
-    label: "Orange",
-    source:
-      "https://www.nutritionvalue.org/Oranges%2C_navels%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.9,
-    caloriePer100g: 49,
-  },
-  {
-    value: "mango",
-    label: "Mango",
-    source:
-      "https://www.nutritionvalue.org/Mangos%2C_raw_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.8,
-    caloriePer100g: 60,
-  },
-  {
-    value: "kiwi",
-    label: "Kiwi",
-    source:
-      "https://www.nutritionvalue.org/Kiwi_fruit%2C_raw_63126500_nutritional_value.html?size=100+g",
-    proteinPer100g: 1.1,
-    caloriePer100g: 58,
-  },
-  {
-    value: "grape",
-    label: "Grape",
-    source:
-      "https://www.nutritionvalue.org/Grapes%2C_raw%2C_red_or_green_%28European_type%2C_such_as_Thompson_seedless%29_nutritional_value.html?size=100+g",
-    proteinPer100g: 0.7,
-    caloriePer100g: 69,
-  },
-  // Grains
-  {
-    value: "longGrainBrownRice",
-    label: "long grain Brown Rice",
-    source:
-      "https://www.nutritionvalue.org/Rice%2C_raw%2C_long-grain%2C_brown_nutritional_value.html?size=100%20g",
-    proteinPer100g: 7.5,
-    caloriePer100g: 367,
-  },
-  {
-    value: "longGrainWhiteRice",
-    label: "long grain White Rice",
-    source:
-      "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_raw%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
-    proteinPer100g: 7.1,
-    caloriePer100g: 365,
-  },
-  {
-    value: "wheatBread",
-    label: "Wheat Bread",
-    source:
-      "https://www.nutritionvalue.org/Bread%2C_wheat_nutritional_value.html?size=100+g",
-    proteinPer100g: 11,
-    caloriePer100g: 274,
-  },
-  {
-    value: "wheatBagel",
-    label: "Wheat Bagel",
-    source:
-      "https://www.nutritionvalue.org/Bagel%2C_whole_wheat_51301750_nutritional_value.html",
-    proteinPer100g: 13,
-    caloriePer100g: 328,
-  },
+  ...fruitOptions,
   // Seeds
   {
     value: "hempSeeds",
@@ -954,6 +978,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Seeds%2C_hulled%2C_hemp_seed_nutritional_value.html?size=100+g",
     proteinPer100g: 32,
     caloriePer100g: 553,
+    fiberPer100g: 4,
   },
   {
     value: "quinoaUncooked",
@@ -962,6 +987,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Quinoa%2C_uncooked_nutritional_value.html?size=100%20g",
     proteinPer100g: 14,
     caloriePer100g: 368,
+    fiberPer100g: 7,
   },
   // Powder
   {
@@ -971,6 +997,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Spices%2C_onion_powder_nutritional_value.html?size=100+g",
     proteinPer100g: 10,
     caloriePer100g: 341,
+    fiberPer100g: 15,
   },
   {
     value: "garlicPowder",
@@ -979,6 +1006,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Spices%2C_garlic_powder_nutritional_value.html?size=100+g",
     proteinPer100g: 17,
     caloriePer100g: 331,
+    fiberPer100g: 9,
   },
   // Condiments
   {
@@ -988,6 +1016,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Lemon_juice%2C_raw_nutritional_value.html?size=100+g",
     proteinPer100g: 0.4,
     caloriePer100g: 22,
+    fiberPer100g: 0.3,
   },
   {
     value: "relish",
@@ -996,6 +1025,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Relish%2C_pickle_75503020_nutritional_value.html?size=100+g",
     proteinPer100g: 0.4,
     caloriePer100g: 130,
+    fiberPer100g: 1.1,
   },
   {
     value: "mustard",
@@ -1004,6 +1034,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Mustard%2C_yellow%2C_prepared_nutritional_value.html?size=100+g",
     proteinPer100g: 3.7,
     caloriePer100g: 60,
+    fiberPer100g: 4,
   },
   {
     value: "mayonnaise",
@@ -1012,6 +1043,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Salad_dressing%2C_regular%2C_mayonnaise_nutritional_value.html?size=100+g",
     proteinPer100g: 1,
     caloriePer100g: 680,
+    fiberPer100g: 0,
   },
   {
     value: "ketchup",
@@ -1020,6 +1052,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Ketchup_74401010_nutritional_value.html?size=100+g",
     proteinPer100g: 1,
     caloriePer100g: 101,
+    fiberPer100g: 0.3,
   },
   {
     value: "sriracha",
@@ -1028,6 +1061,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Sauce%2C_sriracha%2C_hot_chile_nutritional_value.html?size=100+g",
     proteinPer100g: 1.9,
     caloriePer100g: 93,
+    fiberPer100g: 2.2,
   },
   {
     value: "soySauce",
@@ -1036,6 +1070,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Soy_sauce_41420300_nutritional_value.html?size=100+g",
     proteinPer100g: 8.1,
     caloriePer100g: 53,
+    fiberPer100g: 0.8,
   },
   {
     value: "salsa",
@@ -1044,6 +1079,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Salsa_552834_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 36,
+    fiberPer100g: 0,
   },
   {
     value: "worcestershireSauce",
@@ -1052,6 +1088,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Worcestershire_sauce_41420450_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 77,
+    fiberPer100g: 0,
   },
   {
     value: "honey",
@@ -1060,6 +1097,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Honey_nutritional_value.html?size=100%20g",
     proteinPer100g: 0.3,
     caloriePer100g: 304,
+    fiberPer100g: 0.2,
   },
   {
     value: "mapleSyrup",
@@ -1068,6 +1106,7 @@ export const veggieOptions: Option[] = [
       "https://www.nutritionvalue.org/Syrups%2C_maple_nutritional_value.html?size=100+g",
     proteinPer100g: 0,
     caloriePer100g: 260,
+    fiberPer100g: 0,
   },
   {
     value: "balsamicVinegar",

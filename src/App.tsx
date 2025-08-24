@@ -6,6 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import "./App.css";
 import { Calculate } from "./calculate";
 import { DisplayData } from "./displayData";
+import { Formulas } from "./formulas";
 
 export default function App() {
   return (
@@ -13,8 +14,9 @@ export default function App() {
       <h1>Protein And Calorie Balancer</h1>
       <Tabs>
         <TabList>
-          <Tab>Calculate</Tab>
+          <Tab>Calculate ingredients</Tab>
           <Tab>Data</Tab>
+          <Tab>Formulas</Tab>
         </TabList>
 
         <TabPanel>
@@ -22,6 +24,9 @@ export default function App() {
         </TabPanel>
         <TabPanel>
           <DisplayData />
+        </TabPanel>
+        <TabPanel>
+          <Formulas />
         </TabPanel>
       </Tabs>
       <ToastContainer theme="colored" />

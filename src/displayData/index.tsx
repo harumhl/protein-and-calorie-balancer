@@ -86,6 +86,7 @@ type PreSortedOptions = {
   caloriePer100g: OptionExtended[];
   proteinPer100g: OptionExtended[];
   caloriePerProtein: OptionExtended[];
+  fiberPer100g: OptionExtended[];
 };
 
 type keyOfPreSortedOptions = keyof PreSortedOptions;
@@ -106,6 +107,7 @@ export function DisplayData() {
     caloriePer100g: sortOptions(sortedOptions, "caloriePer100g"),
     proteinPer100g: sortOptions(sortedOptions, "proteinPer100g"),
     caloriePerProtein: sortOptions(sortedOptions, "caloriePerProtein"),
+    fiberPer100g: sortOptions(sortedOptions, "fiberPer100g"),
   };
 
   const paramsForSortSelection: ParamsForSortSelection = {
@@ -118,7 +120,9 @@ export function DisplayData() {
   return (
     <>
       <button onClick={() => setDisplayMicroNutrients(!displayMicroNutrients)}>
-        Display Micronutrients
+        {displayMicroNutrients
+          ? "Hide Micronutrients"
+          : " Display Micronutrients"}
       </button>
       <table
         className="table-horizontally-centered"
@@ -160,6 +164,12 @@ export function DisplayData() {
             >
               Calorie per 1g of protein (kcal)
             </td>
+            <td
+              className="table-border pointer"
+              onClick={() => selectSort("fiberPer100g", paramsForSortSelection)}
+            >
+              Fiber per 100g (g)
+            </td>
             <td className="table-border">source</td>
             {displayMicroNutrients && (
               <>
@@ -178,6 +188,7 @@ export function DisplayData() {
               caloriePer100g,
               proteinPer100g,
               caloriePerProtein,
+              fiberPer100g,
               source,
             } = option;
             return (
@@ -186,6 +197,7 @@ export function DisplayData() {
                 <td className="table-border">{caloriePer100g}</td>
                 <td className="table-border">{proteinPer100g}</td>
                 <td className="table-border">{caloriePerProtein}</td>
+                <td className="table-border">{fiberPer100g}</td>
                 <td className="table-border">
                   <a
                     href={`${source}`}
