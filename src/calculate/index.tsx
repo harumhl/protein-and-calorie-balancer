@@ -6,16 +6,25 @@ import { faSpinner, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
 
-import optimize from "./optimizer";
+import { optimize } from "./optimizer";
 import {
-  meatOptions,
-  veggieOptions,
+  type Option,
+  meatOptions as mOptions,
+  veggieOptions as vOptions,
   optionalRequirementOptions,
   recommendedMicroNutrients,
+  type MicroNutrient,
 } from "./options";
+import { SolverResult } from "javascript-lp-solver";
+
+export type OptionExtended = Option & {
+  constraintType?: string | undefined;
+  constraintValue?: number | string | undefined;
+  caloriePerProtein?: number | undefined;
+};
 
 function handleExportImport(
-  type,
+  type: "export" | "import",
   {
     toBeImported, // optional
     minProtein,
@@ -26,12 +35,26 @@ function handleExportImport(
     selectedVeggieOptions,
     setSelectedMeatOptions,
     setSelectedVeggieOptions,
+  }: {
+    toBeImported?: string;
+    minProtein: number;
+    maxCalorie: number;
+    setMinProtein: (value: number) => void;
+    setMaxCalorie: (value: number) => void;
+    selectedMeatOptions: OptionExtended[];
+    selectedVeggieOptions: OptionExtended[];
+    setSelectedMeatOptions: (options: OptionExtended[]) => void;
+    setSelectedVeggieOptions: (options: OptionExtended[]) => void;
   }
 ) {
+  function stringToNumber(str: string | number): number {
+    return typeof str === "string" ? parseFloat(str) : str;
+  }
+
   let result;
   switch (type) {
     case "export":
-      const requirements = [
+      const requirements: string[] = [
         ...selectedMeatOptions,
         ...selectedVeggieOptions,
       ].map((o) =>
@@ -45,11 +68,11 @@ function handleExportImport(
         (requirements.length > 0 ? `requirements:${requirements};` : "");
       break;
     case "import":
-      function stringToNumber(str) {
-        return typeof str === "string" ? parseFloat(str) : str;
-      }
-      for (const elem of toBeImported.split(";")) {
+      if (!toBeImported) return;
+      for (const elem of toBeImported?.split(";")) {
         const [key, value] = elem.split(":");
+        if (!key || !value) continue;
+
         switch (key) {
           case "minProtein":
             setMinProtein(stringToNumber(value));
@@ -58,12 +81,12 @@ function handleExportImport(
             setMaxCalorie(stringToNumber(value));
             break;
           case "requirements":
-            const meats = [];
-            const veggies = [];
+            const meats: OptionExtended[] = [];
+            const veggies: OptionExtended[] = [];
             for (const requirement of value.split(",")) {
               const [option, constraintType, constraintValue] =
                 requirement.split("'");
-              const meat = meatOptions.find((o) => o.value === option);
+              const meat = mOptions.find((o) => o.value === option);
               if (meat) {
                 meats.push({
                   ...meat,
@@ -71,8 +94,15 @@ function handleExportImport(
                   constraintValue,
                 });
               } else {
-                const veggie = veggieOptions.find((o) => o.value === option);
-                veggies.push({ ...veggie, constraintType, constraintValue });
+                const veggie = vOptions.find((o) => o.value === option);
+                if (veggie) {
+                  veggies.push({
+                    ...veggie,
+                    value: veggie.value as string,
+                    constraintType,
+                    constraintValue,
+                  });
+                }
               }
             }
             setSelectedMeatOptions(meats);
@@ -89,14 +119,21 @@ function handleExportImport(
   return result;
 }
 
-function Calculate() {
+export function Calculate() {
+  const meatOptions: OptionExtended[] = mOptions;
+  const veggieOptions: OptionExtended[] = vOptions;
+
   const [minProtein, setMinProtein] = useState(30);
   const [maxCalorie, setMaxCalorie] = useState(600);
-  const [micronutrientPercent, setMicronutrientPercent] = useState(false);
-  const [selectedMeatOptions, setSelectedMeatOptions] = useState([]);
-  const [selectedVeggieOptions, setSelectedVeggieOptions] = useState([]);
+  const [micronutrientPercent, setMicronutrientPercent] = useState(0);
+  const [selectedMeatOptions, setSelectedMeatOptions] = useState<
+    OptionExtended[]
+  >([]);
+  const [selectedVeggieOptions, setSelectedVeggieOptions] = useState<
+    OptionExtended[]
+  >([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [runResult, setRunResult] = useState(null);
+  const [runResult, setRunResult] = useState<SolverResult | null>(null);
   const [learnMore, setLearnMore] = useState(false);
 
   const forImportAndExport = {
@@ -153,7 +190,7 @@ function Calculate() {
           className="requirement-dropdown"
           defaultValue={selectedMeatOptions}
           value={selectedMeatOptions}
-          onChange={setSelectedMeatOptions}
+          onChange={(newValues) => setSelectedMeatOptions([...newValues])}
           options={meatOptions}
           isMulti={true}
           isSearchable={true}
@@ -167,7 +204,7 @@ function Calculate() {
           className="requirement-dropdown"
           defaultValue={selectedVeggieOptions}
           value={selectedVeggieOptions}
-          onChange={setSelectedVeggieOptions}
+          onChange={(newValues) => setSelectedVeggieOptions([...newValues])}
           options={veggieOptions}
           isMulti={true}
           isSearchable={true}
@@ -222,7 +259,7 @@ function Calculate() {
                         ? o
                         : {
                             ...o,
-                            constraintType: maxMinSelection.value,
+                            constraintType: maxMinSelection?.value,
                           };
                     })
                   );
@@ -276,7 +313,7 @@ function Calculate() {
                 return;
               }
               setIsRunning(true);
-              let result;
+              let result: SolverResult;
               try {
                 result = await optimize(
                   minProtein,
@@ -296,36 +333,41 @@ function Calculate() {
               // Further processing
               result.calorie = Math.round(result.result);
               result.protein = Math.round(
-                [...meatOptions, ...veggieOptions].reduce((acc, currOption) => {
-                  return result[currOption.value]
-                    ? acc +
-                        (currOption.proteinPer100g / 100.0) *
-                          result[currOption.value]
-                    : acc;
-                }, 0)
+                [...meatOptions, ...veggieOptions].reduce(
+                  (acc, currOption: Option) => {
+                    const proteinAmount = result[currOption.value];
+                    return typeof proteinAmount === "number"
+                      ? acc +
+                          (currOption.proteinPer100g / 100.0) * proteinAmount
+                      : acc;
+                  },
+                  0
+                )
               );
               result = {
                 ...result,
                 ...Object.keys(recommendedMicroNutrients).reduce(
                   // Get micronutrient in %
                   (acc, currNutrientKey) => {
+                    const nutrientKey = currNutrientKey as keyof MicroNutrient;
                     const nutrientInGram = [
                       ...meatOptions,
                       ...veggieOptions,
-                    ].reduce((acc2, currOption) => {
-                      return result[currOption.value] &&
-                        currOption[`${currNutrientKey}Per100g`]
-                        ? acc2 +
-                            (currOption[`${currNutrientKey}Per100g`] / 100.0) *
-                              result[currOption.value]
+                    ].reduce((acc2, currOption: Option) => {
+                      const key =
+                        `${nutrientKey}Per100g` as keyof typeof Option;
+                      const microNutrientAmount = result[currOption.value];
+                      return typeof microNutrientAmount === "number" &&
+                        currOption[key]
+                        ? acc2 + (currOption[key] / 100.0) * microNutrientAmount
                         : acc2;
                     }, 0);
+                    const microNutrient: number =
+                      recommendedMicroNutrients[nutrientKey];
                     return {
                       ...acc,
                       [currNutrientKey]: Math.round(
-                        (nutrientInGram /
-                          recommendedMicroNutrients[currNutrientKey]) *
-                          100
+                        (nutrientInGram / microNutrient) * 100
                       ),
                     };
                   },
@@ -359,14 +401,17 @@ function Calculate() {
                     )}
                 </ul>
                 <ul className="result-list">
-                  {[...meatOptions, ...veggieOptions].map((option) => {
+                  {[...meatOptions, ...veggieOptions].map((option: Option) => {
                     // Display how much each option to consume
+                    const nutrientAmount: number | boolean | undefined =
+                      runResult[option.value];
+                    if (typeof nutrientAmount !== "number") return null;
                     return (
                       runResult[option.value] && (
                         <li key={`result-${option.value}`}>
                           {/* Round to the first decimal e.g. 123.456 -> 123.4 */}
-                          {option.label}:{" "}
-                          {Math.round(runResult[option.value] * 10) / 10}g
+                          {option.label}: {Math.round(nutrientAmount * 10) / 10}
+                          g
                         </li>
                       )
                     );
@@ -390,7 +435,8 @@ function Calculate() {
           size="2x"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            const content = handleExportImport("export", forImportAndExport);
+            const content =
+              handleExportImport("export", forImportAndExport) || "";
             navigator.clipboard.writeText(content);
             toast.success("Copied to clipboard");
           }}
@@ -411,7 +457,8 @@ function Calculate() {
                 return;
               }
             }
-            const content = handleExportImport("export", forImportAndExport);
+            const content =
+              handleExportImport("export", forImportAndExport) || "";
             localStorage.setItem("protein-and-calorie-balancer", content);
             toast.success("Saved to browser");
           }}
@@ -436,9 +483,8 @@ function Calculate() {
           size="2x"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            const content = localStorage.getItem(
-              "protein-and-calorie-balancer"
-            );
+            const content =
+              localStorage.getItem("protein-and-calorie-balancer") || "";
             handleExportImport("import", {
               ...forImportAndExport,
               toBeImported: content,
@@ -489,5 +535,3 @@ function Calculate() {
     </>
   );
 }
-
-export default Calculate;

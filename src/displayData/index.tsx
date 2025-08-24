@@ -1,13 +1,15 @@
 import { useState } from "react";
-
-import "./index.css";
 import {
   meatOptions,
   veggieOptions,
   recommendedMicroNutrients,
-} from "./../calculate/options";
+} from "../calculate/options";
+import { OptionExtended } from "../calculate";
+import "./index.css";
 
-function addCaloriePerProteinToOptions(options) {
+function addCaloriePerProteinToOptions(
+  options: OptionExtended[]
+): OptionExtended[] {
   return options.map((option) => {
     const { caloriePer100g, proteinPer100g } = option;
     // two decimal places
@@ -17,14 +19,17 @@ function addCaloriePerProteinToOptions(options) {
   });
 }
 
-function sortOptions(options, sortBy) {
+function sortOptions(
+  options: OptionExtended[],
+  sortBy: keyOfPreSortedOptions
+): OptionExtended[] {
   // create new array after sort
-  return [...options].sort((a, b) => {
+  return [...options].sort((a: OptionExtended, b: OptionExtended) => {
     // case-insensitive
     const aOption =
-      typeof a[sortBy] === "string" ? a[sortBy].toLowerCase() : a[sortBy];
+      typeof a[sortBy] === "string" ? a[sortBy].toLowerCase() : a[sortBy] || "";
     const bOption =
-      typeof b[sortBy] === "string" ? b[sortBy].toLowerCase() : b[sortBy];
+      typeof b[sortBy] === "string" ? b[sortBy].toLowerCase() : b[sortBy] || "";
     if (aOption < bOption) {
       return -1;
     }
@@ -35,19 +40,31 @@ function sortOptions(options, sortBy) {
   });
 }
 
+type Sort = {
+  sort: keyOfPreSortedOptions;
+  dir: "asc" | "desc";
+};
+
+type ParamsForSortSelection = {
+  currentSortWithDirection: Sort;
+  preSortedOptions: PreSortedOptions;
+  setSortedOptions: (options: OptionExtended[]) => void;
+  setSelectedSort: (sort: Sort) => void;
+};
+
 function selectSort(
-  selectedSort,
+  selectedSort: keyOfPreSortedOptions,
   {
     currentSortWithDirection,
     preSortedOptions,
     setSortedOptions,
     setSelectedSort,
-  }
-) {
+  }: ParamsForSortSelection
+): void {
   // Save the new sort (selected by user) & Assign the correctly-sorted options (to reflect user's sort selection)
 
   const { sort: currentSort, dir: currentDirection } = currentSortWithDirection;
-  let newDirection = "asc";
+  let newDirection: Sort["dir"] = "asc";
   if (currentSort === selectedSort) {
     newDirection = currentDirection === "asc" ? "desc" : "asc";
   }
@@ -64,21 +81,34 @@ function selectSort(
   });
 }
 
-function DisplayData() {
-  const [sortedOptions, setSortedOptions] = useState(
+type PreSortedOptions = {
+  label: OptionExtended[];
+  caloriePer100g: OptionExtended[];
+  proteinPer100g: OptionExtended[];
+  caloriePerProtein: OptionExtended[];
+};
+
+type keyOfPreSortedOptions = keyof PreSortedOptions;
+
+export function DisplayData() {
+  const [sortedOptions, setSortedOptions] = useState<OptionExtended[]>(
     addCaloriePerProteinToOptions([...meatOptions, ...veggieOptions])
   );
-  const [selectedSort, setSelectedSort] = useState({});
-  const [displayMicroNutrients, setDisplayMicroNutrients] = useState(false);
+  const [selectedSort, setSelectedSort] = useState<Sort>({
+    sort: "label",
+    dir: "asc",
+  });
+  const [displayMicroNutrients, setDisplayMicroNutrients] =
+    useState<boolean>(false);
 
-  const preSortedOptions = {
+  const preSortedOptions: PreSortedOptions = {
     label: sortOptions(sortedOptions, "label"),
     caloriePer100g: sortOptions(sortedOptions, "caloriePer100g"),
     proteinPer100g: sortOptions(sortedOptions, "proteinPer100g"),
     caloriePerProtein: sortOptions(sortedOptions, "caloriePerProtein"),
   };
 
-  const paramsForSortSelection = {
+  const paramsForSortSelection: ParamsForSortSelection = {
     currentSortWithDirection: selectedSort,
     preSortedOptions,
     setSortedOptions,
@@ -168,9 +198,10 @@ function DisplayData() {
                 {displayMicroNutrients && (
                   <>
                     {Object.keys(recommendedMicroNutrients).map((nutrient) => {
+                      const key = `${nutrient}Per100g` as keyof OptionExtended;
                       return (
                         <td className="table-border">
-                          {option[`${nutrient}Per100g`]}
+                          {key in option ? option[key] : ""}
                         </td>
                       );
                     })}
@@ -184,5 +215,3 @@ function DisplayData() {
     </>
   );
 }
-
-export default DisplayData;

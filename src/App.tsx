@@ -4,10 +4,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 import "./App.css";
-import Calculate from "./calculate";
-import DisplayData from "./displayData";
+import { Calculate } from "./calculate";
+import { DisplayData } from "./displayData";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <h1>Protein And Calorie Balancer</h1>
@@ -28,5 +28,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

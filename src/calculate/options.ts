@@ -1,4 +1,4 @@
-type Option = {
+export type Option = {
   value: string;
   label: string;
   source: string;
@@ -34,7 +34,7 @@ type Option = {
   zincPer100g?: number;
 };
 
-const meatOptions: Option[] = [
+export const meatOptions: Option[] = [
   {
     value: "chickenBreastWithSkin",
     label: "Chicken Breast (with skin)",
@@ -369,7 +369,7 @@ const meatOptions: Option[] = [
   },
 ];
 
-const veggieOptions: Option[] = [
+export const veggieOptions: Option[] = [
   // Fatty
   {
     value: "oliveOil",
@@ -1079,7 +1079,7 @@ const veggieOptions: Option[] = [
   },
 ];
 
-const optionalRequirementOptions = [
+export const optionalRequirementOptions = [
   {
     value: "max",
     label: "Maximum",
@@ -1094,7 +1094,39 @@ const optionalRequirementOptions = [
   },
 ];
 
-const recommendedMicroNutrients = {
+export type MicroNutrient = {
+  vitaminA: number;
+  vitaminB1: number; // Thiamin
+  vitaminB2: number; // Riboflavin
+  vitaminB3: number; // Niacin
+  vitaminB5: number; // Pantothenic Acid
+  vitaminB6: number;
+  vitaminB7: number; // Biotin
+  vitaminB9: number; // Folate (aka Folic Acid)
+  vitaminB12: number;
+  vitaminC: number;
+  vitaminD: number;
+  vitaminE: number;
+  vitaminK: number;
+  calcium: number;
+  chloride: number;
+  choline: number;
+  chromium: number;
+  copper: number;
+  fiber: number;
+  iodine: number;
+  iron: number;
+  magnesium: number;
+  manganese: number;
+  molybdenum: number;
+  phosphorus: number;
+  potassium: number;
+  selenium: number;
+  sodium: number;
+  zinc: number;
+};
+
+export const recommendedMicroNutrients: MicroNutrient = {
   // source: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
   // in grams
   vitaminA: 0.0009,
@@ -1126,11 +1158,4 @@ const recommendedMicroNutrients = {
   selenium: 0.000055,
   sodium: 2.3,
   zinc: 0.011,
-};
-
-export {
-  meatOptions,
-  veggieOptions,
-  optionalRequirementOptions,
-  recommendedMicroNutrients,
 };
