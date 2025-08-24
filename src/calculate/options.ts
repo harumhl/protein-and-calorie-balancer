@@ -1,4 +1,40 @@
-const meatOptions = [
+type Option = {
+  value: string;
+  label: string;
+  source: string;
+  proteinPer100g: number;
+  caloriePer100g: number;
+  vitaminAPer100g?: number;
+  vitaminB1Per100g?: number;
+  vitaminB2Per100g?: number;
+  vitaminB3Per100g?: number;
+  vitaminB5Per100g?: number;
+  vitaminB6Per100g?: number;
+  vitaminB7Per100g?: number;
+  vitaminB9Per100g?: number;
+  vitaminB12Per100g?: number;
+  vitaminCPer100g?: number;
+  vitaminDPer100g?: number;
+  vitaminEPer100g?: number;
+  vitaminKPer100g?: number;
+  calciumPer100g?: number;
+  cholinePer100g?: number;
+  chromiumPer100g?: number;
+  copperPer100g?: number;
+  fiberPer100g?: number;
+  iodinePer100g?: number;
+  ironPer100g?: number;
+  magnesiumPer100g?: number;
+  manganesePer100g?: number;
+  molybdenumPer100g?: number;
+  phosphorusPer100g?: number;
+  potassiumPer100g?: number;
+  seleniumPer100g?: number;
+  sodiumPer100g?: number;
+  zincPer100g?: number;
+};
+
+const meatOptions: Option[] = [
   {
     value: "chickenBreastWithSkin",
     label: "Chicken Breast (with skin)",
@@ -333,7 +369,7 @@ const meatOptions = [
   },
 ];
 
-const veggieOptions = [
+const veggieOptions: Option[] = [
   // Fatty
   {
     value: "oliveOil",
