@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DietPlanner } from "./DietPlanner";
 
 enum Gender {
   Women = "women",
@@ -78,7 +79,6 @@ const Bmr = ({
           type="number"
           value={weight}
           onChange={(e) => setWeight(Number(e.target.value))}
-          style={{ width: "60px" }}
         />
         {" lbs"}
       </div>
@@ -88,14 +88,12 @@ const Bmr = ({
           type="number"
           value={heightFeet}
           onChange={(e) => setHeightFeet(Number(e.target.value))}
-          style={{ width: "50px" }}
         />
         {" feet "}
         <input
           type="number"
           value={heightInch}
           onChange={(e) => setHeightInch(Number(e.target.value))}
-          style={{ width: "50px" }}
         />
         {" inches"}
       </div>
@@ -105,7 +103,6 @@ const Bmr = ({
           type="number"
           value={age}
           onChange={(e) => setAge(Number(e.target.value))}
-          style={{ width: "60px" }}
         />
         {" years old"}
       </div>
@@ -135,7 +132,7 @@ const Bmr = ({
       </div>
       <div>
         Suggested calorie intake to maintain essential bodily functions:{" "}
-        <input disabled value={bmr} style={{ width: "50px" }} />
+        <input disabled value={bmr} />
         {" kcal/day"}
       </div>
     </div>
@@ -243,41 +240,21 @@ const Maintenance = ({
         <br />
         <div>
           Suggested calorie intake to maintain curent weight:{" "}
-          <input
-            disabled
-            value={maintenanceCalorie}
-            style={{ width: "50px" }}
-          />
+          <input disabled value={maintenanceCalorie} />
           {" kcal/day"}
         </div>
         <div>
           Suggested protein intake to maintain current muscle mass:{" "}
-          <input
-            disabled
-            value={maintenanceProteinLowEnd}
-            style={{ width: "50px" }}
-          />
+          <input disabled value={maintenanceProteinLowEnd} />
           {" - "}
-          <input
-            disabled
-            value={maintenanceProteinHighEnd}
-            style={{ width: "50px" }}
-          />
+          <input disabled value={maintenanceProteinHighEnd} />
           {" g/day"}
         </div>
         <div>
           Suggested protein intake to grow muscles:{" "}
-          <input
-            disabled
-            value={Math.round(toKg(weightInPounds) * 1.6)}
-            style={{ width: "50px" }}
-          />
+          <input disabled value={Math.round(toKg(weightInPounds) * 1.6)} />
           {" - "}
-          <input
-            disabled
-            value={Math.round(toKg(weightInPounds) * 2.2)}
-            style={{ width: "50px" }}
-          />
+          <input disabled value={Math.round(toKg(weightInPounds) * 2.2)} />
           {" g/day"}
         </div>
       </div>
@@ -315,6 +292,16 @@ export const Formulas = () => {
       <Maintenance
         {...{ weightInPounds: weight, bmr, activity, setActivity }}
       />
+      <h3>Fiber</h3>
+      <div>
+        Suggested fiber intake: <input disabled value={25} />
+        {" - "}
+        <input disabled value={28} />
+        g/day for women, <input disabled value={31} />
+        {" - "}
+        <input disabled value={38} /> for men
+      </div>
+      <DietPlanner />
     </div>
   );
 };

@@ -1014,6 +1014,15 @@ export const veggieOptions: Option[] = [
     fiberPer100g: 4,
   },
   {
+    value: "chiaSeeds",
+    label: "Chia Seeds",
+    source:
+      "https://www.nutritionvalue.org/Seeds%2C_dried%2C_chia_seeds_nutritional_value.html?size=100+g",
+    proteinPer100g: 17,
+    caloriePer100g: 486,
+    fiberPer100g: 34,
+  },
+  {
     value: "quinoaUncooked",
     label: "Quinoa (uncooked)",
     source:
