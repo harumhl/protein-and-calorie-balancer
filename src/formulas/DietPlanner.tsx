@@ -41,6 +41,7 @@ export const DietPlanner = () => {
                     option.label
                   ) : (
                     <input
+                      value={option.label}
                       onChange={(e) =>
                         setSelectedItems((prev) =>
                           prev.map((itm) => {
@@ -86,6 +87,7 @@ export const DietPlanner = () => {
                   ) : (
                     <input
                       type="number"
+                      value={option.caloriePer100g}
                       onChange={(e) =>
                         setSelectedItems((prev) =>
                           prev.map((itm) => {
@@ -111,6 +113,7 @@ export const DietPlanner = () => {
                   ) : (
                     <input
                       type="number"
+                      value={option.proteinPer100g}
                       onChange={(e) =>
                         setSelectedItems((prev) =>
                           prev.map((itm) => {
@@ -136,6 +139,7 @@ export const DietPlanner = () => {
                   ) : (
                     <input
                       type="number"
+                      value={option.fiberPer100g || 0}
                       onChange={(e) =>
                         setSelectedItems((prev) =>
                           prev.map((itm) => {
