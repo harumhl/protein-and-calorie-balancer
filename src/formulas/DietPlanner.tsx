@@ -23,12 +23,14 @@ export const DietPlanner = () => {
       <h2>Diet Planner</h2>
       <table style={{ justifySelf: "center" }}>
         <thead>
-          <th>Item</th>
-          <th>Amount (g)</th>
-          <th>Calories</th>
-          <th>Protein (g)</th>
-          <th>Fiber (g)</th>
-          <th></th>
+          <tr>
+            <th>Item</th>
+            <th>Amount (g)</th>
+            <th>Calories</th>
+            <th>Protein (g)</th>
+            <th>Fiber (g)</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           {/* Display selected item + Allow entering amount (g) */}

@@ -114,8 +114,8 @@ const Bmr = ({
             id={Gender.Women}
             name="gender"
             value={Gender.Women}
-            onChange={(e) => console.log(e)}
             checked={gender === Gender.Women}
+            onChange={() => setGender(Gender.Women)}
           />
           Women
         </label>
@@ -126,6 +126,7 @@ const Bmr = ({
             name="gender"
             value={Gender.Men}
             checked={gender === Gender.Men}
+            onChange={() => setGender(Gender.Men)}
           />
           Men
         </label>
@@ -190,6 +191,7 @@ const Maintenance = ({
             name="activity"
             value={Activity.Sedentary}
             checked={activity === Activity.Sedentary}
+            onChange={() => setActivity(Activity.Sedentary)}
           />
           Sedentary (little to no exercise)
         </label>
@@ -201,6 +203,7 @@ const Maintenance = ({
             name="activity"
             value={Activity.LightlyActive}
             checked={activity === Activity.LightlyActive}
+            onChange={() => setActivity(Activity.LightlyActive)}
           />
           Lightly active (light exercise 1-3 days/week)
         </label>
@@ -212,6 +215,7 @@ const Maintenance = ({
             name="activity"
             value={Activity.ModeratelyActive}
             checked={activity === Activity.ModeratelyActive}
+            onChange={() => setActivity(Activity.ModeratelyActive)}
           />
           Moderately active (moderate exercise 3-5 days/week)
         </label>
@@ -223,6 +227,7 @@ const Maintenance = ({
             name="activity"
             value={Activity.VeryActive}
             checked={activity === Activity.VeryActive}
+            onChange={() => setActivity(Activity.VeryActive)}
           />
           Very active (hard exercise 6-7 days/week)
         </label>
@@ -234,6 +239,7 @@ const Maintenance = ({
             name="activity"
             value={Activity.SuperActive}
             checked={activity === Activity.SuperActive}
+            onChange={() => setActivity(Activity.SuperActive)}
           />
           Super active (physical job or twice daily training)
         </label>

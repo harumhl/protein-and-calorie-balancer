@@ -41,6 +41,7 @@ export type Option = {
   proteinPer100g: number;
   caloriePer100g: number;
   fiberPer100g: number | null; // null means unknown
+  // tspToGram?: number;
 } & AddSuffix<Omit<MicroNutrient, "fiber">, "Per100g">; // vitaminAPer100g, ironPer100g, etc.
 
 export const meatOptions: Option[] = [
@@ -577,6 +578,7 @@ export const veggieOptions: Option[] = [
     proteinPer100g: 0,
     caloriePer100g: 884,
     fiberPer100g: 0,
+    // tspToGram: 4.5,
   },
   {
     value: "butter",
@@ -676,6 +678,34 @@ export const veggieOptions: Option[] = [
     proteinPer100g: 2,
     caloriePer100g: 160,
     fiberPer100g: 6.7,
+  },
+  // Grains
+  {
+    value: "cookedShortGrainWhiteRice",
+    label: "Cooked Short-Grain White Rice",
+    source:
+      "https://www.nutritionvalue.org/Rice%2C_unenriched%2C_cooked%2C_short-grain%2C_white_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.4,
+    caloriePer100g: 130,
+    fiberPer100g: null,
+  },
+  {
+    value: "cookedMediumGrainWhiteRice",
+    label: "Cooked Medium-Grain White Rice",
+    source:
+      "https://www.nutritionvalue.org/Rice%2C_cooked%2C_enriched%2C_medium-grain%2C_white_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.4,
+    caloriePer100g: 130,
+    fiberPer100g: null,
+  },
+  {
+    value: "cookedLongGrainWhiteRice",
+    label: "Cooked Long-Grain White Rice",
+    source:
+      "https://www.nutritionvalue.org/Rice%2C_cooked%2C_enriched%2C_regular%2C_long-grain%2C_white_nutritional_value.html?size=100+g",
+    proteinPer100g: 2.7,
+    caloriePer100g: 130,
+    fiberPer100g: null,
   },
   // Veggies
   {
@@ -1021,6 +1051,7 @@ export const veggieOptions: Option[] = [
     proteinPer100g: 17,
     caloriePer100g: 486,
     fiberPer100g: 34,
+    // tspToGram: 10.1/3,
   },
   {
     value: "quinoaUncooked",
