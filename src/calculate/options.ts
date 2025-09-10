@@ -44,6 +44,84 @@ export type Option = {
   // tspToGram?: number;
 } & AddSuffix<Omit<MicroNutrient, "fiber">, "Per100g">; // vitaminAPer100g, ironPer100g, etc.
 
+const fastFoodOptions: Option[] = [
+  // TODO Per100g doesn't make sense here, I need per item
+  {
+    value: "mightyFineHalfPoundBurgerWithCheese",
+    label: "Mighty Fine - half pound burger with cheese",
+    source:
+      "https://www.mynetdiary.com/food/calories-in-half-lb-burger-with-cheese-by-mighty-fine-burgers-serving-18212406-0.html",
+    // secondary source: https://www.carbmanager.com/food-detail/md:9a748171992a91d34f2ff76b35e38f44/half-lb-burger-with-cheese
+    proteinPer100g: 60, // per burger
+    caloriePer100g: 792, // per burger
+    fiberPer100g: 3, // per burger
+  },
+  {
+    value: "mightyFineCrinkleCutFrenchFries",
+    label: "Mighty Fine - crinkle cut french fries",
+    source:
+      "https://www.mynetdiary.com/food/calories-in-crinkle-cut-french-fries-by-mighty-fine-burgers-serving-18212411-0.html",
+    // secondary source: https://www.carbmanager.com/food-detail/md:b664bc2a58d0bc42feb065933968b538/crinkle-cut-french-fries
+    proteinPer100g: 9, // per fries bag
+    caloriePer100g: 493, // per fries bag
+    fiberPer100g: 2, // per fries bag
+  },
+  {
+    value: "shakeShackSingleShackburger",
+    label: "Shake Shack - single shackburger",
+    source:
+      "https://shakeshackmenu.net/wp-content/uploads/2025/01/Shake-Shack-Nutrition-Facts-2025.pdf",
+    proteinPer100g: 29, // per burger
+    caloriePer100g: 500, // per burger
+    fiberPer100g: 0, // per burger
+  },
+  {
+    value: "shakeShackDoubleShackburger",
+    label: "Shake Shack - double shackburger",
+    source:
+      "https://shakeshackmenu.net/wp-content/uploads/2025/01/Shake-Shack-Nutrition-Facts-2025.pdf",
+    proteinPer100g: 51, // per burger
+    caloriePer100g: 760, // per burger
+    fiberPer100g: 0, // per burger
+  },
+  {
+    value: "shakeShackAvocadoBaconBurgerSingle",
+    label: "Shake Shack - avocado bacon burger, single",
+    source:
+      "https://shakeshackmenu.net/wp-content/uploads/2025/01/Shake-Shack-Nutrition-Facts-2025.pdf",
+    proteinPer100g: 36, // per burger
+    caloriePer100g: 610, // per burger
+    fiberPer100g: 2, // per burger
+  },
+  {
+    value: "snoozeAMEateryStrawberryShortcakePancakes",
+    label: "Snooze A.M. Eatery - strawberry shortcake pancakes",
+    source:
+      "https://www.mynetdiary.com/food/calories-in-strawberry-shortcake-pancakes-by-snooze-an-a-m-eatery-serving-40785822-0.html",
+    proteinPer100g: 20, // per dish
+    caloriePer100g: 910, // per dish
+    fiberPer100g: 6, // per dish
+  },
+  {
+    value: "snoozeAMEateryPineappleUpsideDownPancakes",
+    label: "Snooze A.M. Eatery - pineapple upside down pancakes",
+    source:
+      "https://www.mynetdiary.com/food/calories-in-pineapple-upside-down-pancakes-by-snooze-an-a-m-eatery-serving-23789311-0.html",
+    proteinPer100g: 19, // per dish
+    caloriePer100g: 1070, // per dish
+    fiberPer100g: 2, // per dish
+  },
+  {
+    value: "snoozeAMEateryPineappleUpsideDownPancakesFlight",
+    label: "Snooze A.M. Eatery - pineapple upside down pancakes flight",
+    source:
+      "https://www.mynetdiary.com/food/calories-in-pineapple-upside-down-pancakes-flight-by-snooze-an-a-m-eatery-serving-23789333-0.html",
+    proteinPer100g: 5, // per dish
+    caloriePer100g: 310, // per dish
+    fiberPer100g: 1, // per dish
+  },
+];
+
 export const meatOptions: Option[] = [
   {
     value: "chickenBreastWithSkin",
@@ -391,6 +469,7 @@ export const meatOptions: Option[] = [
     caloriePer100g: 76,
     fiberPer100g: 0.3,
   },
+  ...fastFoodOptions,
 ];
 
 const fruitOptions: Option[] = [
