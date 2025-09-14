@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   meatOptions,
   veggieOptions,
   type Option,
 } from "./../calculate/options";
 import Select from "react-select";
+import { importAndExport, ImportExport } from "../utils/import_export";
 
 function isTouchingBottomOfPage() {
   return window.innerHeight + window.scrollY >= document.body.offsetHeight;
@@ -14,10 +15,60 @@ function isPredefinedItem(item: Partial<Option>) {
   return [...meatOptions, ...veggieOptions].find((o) => o.label === item.label);
 }
 
-export const DietPlanner = () => {
-  const [selectedItems, setSelectedItems] = useState<
-    { option: Partial<Option>; amountInGram: number }[]
-  >([]);
+function findOptionByLabel(label: string): Partial<Option> {
+  return (
+    [...meatOptions, ...veggieOptions].find((o) => o.label === label) || {
+      label,
+    }
+  );
+}
+
+export type DietPlannerItem = {
+  option: Partial<Option>;
+  amountInGram: number;
+};
+
+export const DietPlanner = ({
+  setter,
+}: {
+  setter?: (items: DietPlannerItem[]) => void;
+}) => {
+  const [selectedItems, _setSelectedItems] = useState<DietPlannerItem[]>([]);
+
+  const setSelectedItems = useCallback(
+    (fn: (items: DietPlannerItem[]) => DietPlannerItem[]) => {
+      // Set data to both local state and parent setter
+      _setSelectedItems((prev) => {
+        const data = fn(prev);
+        setter?.(data);
+        return data;
+      });
+    },
+    [setter]
+  );
+
+  useEffect(() => {
+    // Load saved data from localStorage if any
+    importAndExport("localStorage", ["browser", "clipboard"], {
+      setter: (data: ImportExport) => {
+        if (
+          data?.dietPlanner &&
+          Array.isArray(data?.dietPlanner) &&
+          data?.dietPlanner?.length > 0
+        ) {
+          setSelectedItems(() =>
+            (data.dietPlanner || []).map((item) => {
+              return {
+                option: findOptionByLabel(item.option.label || ""),
+                amountInGram: item.amountInGram,
+              };
+            })
+          );
+        }
+      },
+    });
+  }, [setSelectedItems]);
+
   return (
     <>
       <h2>Diet Planner</h2>
@@ -45,7 +96,7 @@ export const DietPlanner = () => {
                     <input
                       value={option.label}
                       onChange={(e) =>
-                        setSelectedItems((prev) =>
+                        setSelectedItems((prev: DietPlannerItem[]) =>
                           prev.map((itm) => {
                             return option === itm.option
                               ? {
@@ -69,7 +120,7 @@ export const DietPlanner = () => {
                     type="number"
                     value={amountInGram}
                     onChange={(e) =>
-                      setSelectedItems((prev) =>
+                      setSelectedItems((prev: DietPlannerItem[]) =>
                         prev.map((itm) => {
                           return option === itm.option
                             ? {
@@ -91,7 +142,7 @@ export const DietPlanner = () => {
                       type="number"
                       value={option.caloriePer100g}
                       onChange={(e) =>
-                        setSelectedItems((prev) =>
+                        setSelectedItems((prev: DietPlannerItem[]) =>
                           prev.map((itm) => {
                             return option === itm.option
                               ? {
@@ -117,7 +168,7 @@ export const DietPlanner = () => {
                       type="number"
                       value={option.proteinPer100g}
                       onChange={(e) =>
-                        setSelectedItems((prev) =>
+                        setSelectedItems((prev: DietPlannerItem[]) =>
                           prev.map((itm) => {
                             return option === itm.option
                               ? {
@@ -143,7 +194,7 @@ export const DietPlanner = () => {
                       type="number"
                       value={option.fiberPer100g || 0}
                       onChange={(e) =>
-                        setSelectedItems((prev) =>
+                        setSelectedItems((prev: DietPlannerItem[]) =>
                           prev.map((itm) => {
                             return option === itm.option
                               ? {
@@ -164,7 +215,7 @@ export const DietPlanner = () => {
                   {/* Remove button */}
                   <button
                     onClick={() =>
-                      setSelectedItems((prev) =>
+                      setSelectedItems((prev: DietPlannerItem[]) =>
                         prev.filter((itm) => itm.option !== option)
                       )
                     }
@@ -182,7 +233,7 @@ export const DietPlanner = () => {
                 className="requirement-dropdown"
                 value={null}
                 onChange={(newValue) => {
-                  setSelectedItems((prev) => [
+                  setSelectedItems((prev: DietPlannerItem[]) => [
                     ...prev,
                     { option: newValue as Option, amountInGram: 0 },
                   ]);
@@ -213,7 +264,7 @@ export const DietPlanner = () => {
               {/* Add custom item */}
               <button
                 onClick={() =>
-                  setSelectedItems((prev) => [
+                  setSelectedItems((prev: DietPlannerItem[]) => [
                     ...prev,
                     { option: {}, amountInGram: 0 },
                   ])

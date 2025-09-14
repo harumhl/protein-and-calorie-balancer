@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { DietPlanner } from "./DietPlanner";
+import { useEffect, useState } from "react";
+import { DietPlanner, DietPlannerItem } from "./DietPlanner";
+import {
+  importAndExport,
+  ImportExport,
+  SaveToLocalStorageButton,
+} from "../utils/import_export";
 
 enum Gender {
   Women = "women",
   Men = "men",
 }
-type GenderType = `${Gender}`;
+export type GenderType = `${Gender}`;
 
 enum Activity {
   Sedentary = "sedentary",
@@ -14,7 +19,7 @@ enum Activity {
   VeryActive = "very active",
   SuperActive = "super active",
 }
-type ActivityType = `${Activity}`;
+export type ActivityType = `${Activity}`;
 
 function toKg(pounds: number): number {
   return pounds / 2.20462;
@@ -275,6 +280,32 @@ export const Formulas = () => {
   const [age, setAge] = useState<number>(100);
   const [gender, setGender] = useState<GenderType>(Gender.Women);
   const [activity, setActivity] = useState<ActivityType>(Activity.Sedentary);
+  const [dietPlannerItems, setDietPlannerItems] = useState<DietPlannerItem[]>(
+    []
+  );
+
+  useEffect(() => {
+    // Load saved data from localStorage if any
+    importAndExport("localStorage", ["browser"], {
+      setter: (data: ImportExport) => {
+        if (data?.formulas?.weight) {
+          setWeight(data.formulas.weight);
+        }
+        if (data?.formulas?.heightFeet) {
+          setHeightFeet(data.formulas.heightFeet);
+        }
+        if (data?.formulas?.heightInch) {
+          setHeightInch(data.formulas.heightInch);
+        }
+        if (data?.formulas?.age) {
+          setAge(data.formulas.age);
+        }
+        if (data?.formulas?.activity) {
+          setActivity(data.formulas.activity);
+        }
+      },
+    });
+  }, []);
 
   const bmr = calculateBMR(weight, heightFeet * 12 + heightInch, age, gender);
 
@@ -307,7 +338,20 @@ export const Formulas = () => {
         {" - "}
         <input disabled value={38} /> for men
       </div>
-      <DietPlanner />
+      <DietPlanner setter={setDietPlannerItems} />
+      <SaveToLocalStorageButton
+        data={{
+          formulas: {
+            weight,
+            heightFeet,
+            heightInch,
+            age,
+            gender,
+            activity,
+          },
+          dietPlanner: dietPlannerItems,
+        }}
+      />
     </div>
   );
 };
