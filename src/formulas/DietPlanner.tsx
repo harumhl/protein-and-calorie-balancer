@@ -15,11 +15,10 @@ function isPredefinedItem(item: Partial<Option>) {
   return [...meatOptions, ...veggieOptions].find((o) => o.label === item.label);
 }
 
-function findOptionByLabel(label: string): Partial<Option> {
+function findOptionByLabel(option: Partial<Option>): Partial<Option> {
   return (
-    [...meatOptions, ...veggieOptions].find((o) => o.label === label) || {
-      label,
-    }
+    [...meatOptions, ...veggieOptions].find((o) => o.label === option.label) ||
+    option // custom data
   );
 }
 
@@ -36,10 +35,10 @@ export const DietPlanner = ({
   const [selectedItems, _setSelectedItems] = useState<DietPlannerItem[]>([]);
 
   const setSelectedItems = useCallback(
-    (fn: (items: DietPlannerItem[]) => DietPlannerItem[]) => {
+    (setSelectedItemsFn: (items: DietPlannerItem[]) => DietPlannerItem[]) => {
       // Set data to both local state and parent setter
       _setSelectedItems((prev) => {
-        const data = fn(prev);
+        const data = setSelectedItemsFn(prev);
         setter?.(data);
         return data;
       });
@@ -59,7 +58,7 @@ export const DietPlanner = ({
           setSelectedItems(() =>
             (data.dietPlanner || []).map((item) => {
               return {
-                option: findOptionByLabel(item.option.label || ""),
+                option: findOptionByLabel(item.option),
                 amountInGram: item.amountInGram,
               };
             })
@@ -135,8 +134,12 @@ export const DietPlanner = ({
                 </td>
                 <td>
                   {/* Calorie */}
-                  {isPredefinedItem(option) && option.caloriePer100g ? (
-                    Math.round(option.caloriePer100g * amountInGram) / 100
+                  {isPredefinedItem(option) ? (
+                    option.caloriePer100g ? (
+                      Math.round(option.caloriePer100g * amountInGram) / 100
+                    ) : (
+                      0
+                    )
                   ) : (
                     <input
                       type="number"
@@ -161,8 +164,12 @@ export const DietPlanner = ({
                 </td>
                 <td>
                   {/* Protein */}
-                  {isPredefinedItem(option) && option.proteinPer100g ? (
-                    Math.round(option.proteinPer100g * amountInGram) / 100
+                  {isPredefinedItem(option) ? (
+                    option.proteinPer100g ? (
+                      Math.round(option.proteinPer100g * amountInGram) / 100
+                    ) : (
+                      0
+                    )
                   ) : (
                     <input
                       type="number"
@@ -187,8 +194,12 @@ export const DietPlanner = ({
                 </td>
                 <td>
                   {/* Fiber */}
-                  {isPredefinedItem(option) && option.fiberPer100g ? (
-                    Math.round(option.fiberPer100g * amountInGram) / 100
+                  {isPredefinedItem(option) ? (
+                    option.fiberPer100g ? (
+                      Math.round(option.fiberPer100g * amountInGram) / 100
+                    ) : (
+                      0
+                    )
                   ) : (
                     <input
                       type="number"

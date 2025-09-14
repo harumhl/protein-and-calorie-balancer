@@ -1269,6 +1269,15 @@ export const veggieOptions: Option[] = [
     caloriePer100g: 88,
     fiberPer100g: null,
   },
+  {
+    value: "hebFiberDietarySupplementPowder",
+    label: "H-E-B Fiber Dietary Supplement Powder",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-fiber-dietary-supplement-powder-16-8-oz/1803442",
+    proteinPer100g: 0,
+    caloriePer100g: 375,
+    fiberPer100g: 75,
+  },
 ];
 
 export const optionalRequirementOptions = [

@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { ActivityType, GenderType } from "../formulas";
 import { DietPlannerItem } from "../formulas/DietPlanner";
 import { useState } from "react";
+import { meatOptions, Option, veggieOptions } from "../calculate/options";
 
 export const LOCAL_STORAGE_PREFIX = "protein-and-calorie-balancer";
 export const LOCAL_STORAGE_DATA_KEY = `${LOCAL_STORAGE_PREFIX}:data`;
@@ -23,6 +24,21 @@ export function importAndExport<T>(
   destinations: ("localStorage" | "browser" | "clipboard")[],
   options: { userInput?: T; setter?: (data: T) => void } = {}
 ): T {
+  const cleanUpOption = (
+    option: Partial<Option>
+  ): Partial<Pick<Option, "label">> => {
+    // If the option is from the system, then only keep the label
+    // If the option is custom data, then keep all the data
+    const shouldFilterOutData = [...meatOptions, ...veggieOptions].some(
+      (opt) => opt.label === option.label
+    );
+    return shouldFilterOutData
+      ? option.label
+        ? { label: option.label }
+        : {}
+      : option;
+  };
+
   const { userInput, setter } = options;
   // Get data
   let data;
@@ -53,6 +69,12 @@ export function importAndExport<T>(
             formulas: data.formulas || originalData.formulas,
             dietPlanner: data.dietPlanner || originalData.dietPlanner,
           };
+          data.dietPlanner = data.dietPlanner?.map((item: DietPlannerItem) => {
+            return {
+              ...item,
+              option: cleanUpOption(item.option),
+            };
+          });
           localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(data));
         }
         break;

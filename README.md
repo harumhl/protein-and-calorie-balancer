@@ -63,6 +63,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 1. `firebase deploy`
 1. Check `https://protein-and-calorie-balancer.web.app`
 
+### Adding tag
+
+1. git tag <new_tag>
+2. git push origin --tags
+
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
