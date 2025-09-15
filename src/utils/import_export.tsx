@@ -3,9 +3,11 @@ import { ActivityType, GenderType } from "../formulas";
 import { DietPlannerItem } from "../formulas/DietPlanner";
 import { useState } from "react";
 import { meatOptions, Option, veggieOptions } from "../calculate/options";
-
-export const LOCAL_STORAGE_PREFIX = "protein-and-calorie-balancer";
-export const LOCAL_STORAGE_DATA_KEY = `${LOCAL_STORAGE_PREFIX}:data`;
+import { getData, updateData } from "../firebase/utils";
+import {
+  LOCAL_STORAGE_DATA_KEY,
+  LOCAL_STORAGE_FIREBASE_KEY,
+} from "./constants";
 
 export type ImportExport = {
   formulas?: {
@@ -19,11 +21,14 @@ export type ImportExport = {
   dietPlanner?: DietPlannerItem[];
 };
 
-export function importAndExport<T>(
-  source: "localStorage" | "user-input",
-  destinations: ("localStorage" | "browser" | "clipboard")[],
-  options: { userInput?: T; setter?: (data: T) => void } = {}
-): T {
+export async function importAndExport<T extends ImportExport>(
+  source: "localStorage-and-firebase" | "user-input",
+  destinations: ("localStorage-and-firebase" | "browser" | "clipboard")[],
+  {
+    userInput,
+    setter,
+  }: { userInput?: T; setter?: (data: Partial<T>) => void } = {}
+): Promise<Partial<T>> {
   const cleanUpOption = (
     option: Partial<Option>
   ): Partial<Pick<Option, "label">> => {
@@ -39,19 +44,32 @@ export function importAndExport<T>(
       : option;
   };
 
-  const { userInput, setter } = options;
   // Get data
-  let data;
+  let data: Partial<T> = {};
   switch (source) {
-    case "localStorage":
-      data = localStorage.getItem(LOCAL_STORAGE_DATA_KEY);
-      if (data) {
-        data = JSON.parse(data);
-      }
+    case "localStorage-and-firebase":
+      const localStorageData = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_DATA_KEY) || "{}"
+      ) as Partial<T> & { timestamp: number };
+      const firebaseData = await getData();
+
+      const { timestamp: _, ...localStorageRest } = localStorageData || {};
+      const { timestamp, ...firebaseRest } = firebaseData || {};
+
+      data =
+        !!localStorageData?.timestamp && !!firebaseData?.timestamp
+          ? localStorageData?.timestamp <= firebaseData?.timestamp
+            ? localStorageRest
+            : firebaseRest
+          : !!localStorageData?.timestamp
+          ? localStorageRest
+          : !!firebaseData?.timestamp
+          ? firebaseRest
+          : {};
       // TODO add type validation
       break;
     case "user-input":
-      data = userInput;
+      data = userInput || {};
       break;
     default:
       break;
@@ -60,23 +78,37 @@ export function importAndExport<T>(
   // Send data
   for (const destination of destinations) {
     switch (destination) {
-      case "localStorage":
+      case "localStorage-and-firebase":
+        const d: Partial<T> & { timestamp: number } = {
+          ...data,
+          timestamp: Date.now(),
+        };
+
+        // Clean up data
         const originalData = JSON.parse(
           localStorage.getItem(LOCAL_STORAGE_DATA_KEY) || "{}"
         );
-        if (data) {
-          data = {
-            formulas: data.formulas || originalData.formulas,
-            dietPlanner: data.dietPlanner || originalData.dietPlanner,
-          };
-          data.dietPlanner = data.dietPlanner?.map((item: DietPlannerItem) => {
+        d.formulas =
+          d.formulas ||
+          (originalData.formulas as ImportExport["formulas"]) ||
+          {};
+
+        d.dietPlanner =
+          (
+            d.dietPlanner ??
+            (originalData.dietPlanner as ImportExport["dietPlanner"])
+          )?.map((item: DietPlannerItem) => {
             return {
               ...item,
               option: cleanUpOption(item.option),
             };
-          });
-          localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(data));
-        }
+          }) || [];
+
+        // Save to localStorage
+        localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(d));
+
+        // Save to firebase
+        await updateData(d);
         break;
       case "browser":
         // "browser" means load the data into the current browser tab
@@ -107,28 +139,39 @@ export const SaveToLocalStorageButton = ({
   return (
     <>
       <button
-        onClick={() => {
-          importAndExport("user-input", ["localStorage", "clipboard"], {
-            userInput: data,
-          });
+        onClick={async () => {
+          await importAndExport(
+            "user-input",
+            ["localStorage-and-firebase", "clipboard"],
+            {
+              userInput: data,
+            }
+          );
           toast.success("Saved to the current browser");
         }}
       >
-        Save to local storage
+        Save to local storage (and server)
       </button>
       <input onChange={(e) => setInputValue(e.target.value)}></input>
       <button
-        onClick={() => {
-          try {
-            importAndExport("user-input", ["localStorage"], {
-              userInput: JSON.parse(inputValue),
-            });
-            window.location.reload();
-          } catch (e) {}
+        onClick={async () => {
+          await importAndExport("user-input", ["localStorage-and-firebase"], {
+            userInput: JSON.parse(inputValue),
+          });
+          window.location.reload();
         }}
       >
         Load from input
       </button>
+      <input
+        placeholder="server key"
+        onChange={(e) =>
+          localStorage.setItem(
+            LOCAL_STORAGE_FIREBASE_KEY,
+            `{username: ${e.target.value}}`
+          )
+        }
+      ></input>
     </>
   );
 };

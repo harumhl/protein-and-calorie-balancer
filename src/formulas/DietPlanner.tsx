@@ -48,7 +48,7 @@ export const DietPlanner = ({
 
   useEffect(() => {
     // Load saved data from localStorage if any
-    importAndExport("localStorage", ["browser", "clipboard"], {
+    importAndExport("localStorage-and-firebase", ["browser", "clipboard"], {
       setter: (data: ImportExport) => {
         if (
           data?.dietPlanner &&

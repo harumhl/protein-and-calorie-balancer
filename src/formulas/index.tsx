@@ -286,7 +286,7 @@ export const Formulas = () => {
 
   useEffect(() => {
     // Load saved data from localStorage if any
-    importAndExport("localStorage", ["browser"], {
+    importAndExport("localStorage-and-firebase", ["browser"], {
       setter: (data: ImportExport) => {
         if (data?.formulas?.weight) {
           setWeight(data.formulas.weight);
