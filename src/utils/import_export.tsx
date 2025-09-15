@@ -168,7 +168,7 @@ export const SaveToLocalStorageButton = ({
         onChange={(e) =>
           localStorage.setItem(
             LOCAL_STORAGE_FIREBASE_KEY,
-            `{username: ${e.target.value}}`
+            JSON.stringify({ username: e.target.value })
           )
         }
       ></input>
