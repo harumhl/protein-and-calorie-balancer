@@ -470,10 +470,39 @@ export const meatOptions: Option[] = [
     fiberPer100g: 0.3,
   },
   ...fastFoodOptions,
+  // H-E-B specific
+  {
+    value:
+      "greatCatchFrozenPeeledDeveinedTailOffMediumCookedShrimp71-90ctPerLb",
+    label:
+      "Great Catch Frozen Peeled Deveined Tail-Off Medium Cooked Shrimp, 71 - 90 ct/lb",
+    source:
+      "https://www.heb.com/product-detail/great-catch-frozen-peeled-deveined-tail-off-medium-cooked-shrimp-71-90-ct-lb/1803322",
+    proteinPer100g: 15.28538351,
+    caloriePer100g: 70.5479239,
+    fiberPer100g: 0,
+  },
+  {
+    value: "hebGrassFedFinishedGroundBeef93PercentLean",
+    label: "H-E-B Grass Fed & Finished Ground Beef, 93% Lean",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-grass-fed-finished-ground-beef-93-lean/5569554",
+    proteinPer100g: 20.53571429,
+    caloriePer100g: 151.78571429,
+    fiberPer100g: 0,
+  },
+  {
+    value: "kiolbassaBeefHickorySmokedSausage",
+    label: "Kiolbassa Beef Hickory Smoked Sausage",
+    source:
+      "https://www.heb.com/product-detail/kiolbassa-beef-hickory-smoked-sausage/1622004",
+    proteinPer100g: 15.19493746,
+    caloriePer100g: 293.04522234,
+    fiberPer100g: 0,
+  },
 ];
 
 const fruitOptions: Option[] = [
-  // Fruits
   {
     value: "watermelon",
     label: "Watermelon",
@@ -644,6 +673,43 @@ const fruitOptions: Option[] = [
     proteinPer100g: 0.7,
     caloriePer100g: 69,
     fiberPer100g: 0.9,
+  },
+  // H-E-B specific
+  {
+    value: "hebFrozenBananaSlices",
+    label: "H-E-B Frozen Banana Slices",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-banana-slices/2495036",
+    proteinPer100g: 1.42857143,
+    caloriePer100g: 92.85714286,
+    fiberPer100g: 1.42857143,
+  },
+  {
+    value: "hebFrozenStrawberriesAndBananas",
+    label: "H-E-B Frozen Strawberries & Bananas",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-strawberries-bananas/1495186",
+    proteinPer100g: 0.71428571,
+    caloriePer100g: 71.42857143,
+    fiberPer100g: 2.14285714,
+  },
+  {
+    value: "hebFrozenRaspberries",
+    label: "H-E-B Frozen Raspberries",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-raspberries/125410",
+    proteinPer100g: 1.42857143,
+    caloriePer100g: 57.14285714,
+    fiberPer100g: 3.57142857,
+  },
+  {
+    value: "hebFrozenBlueberries",
+    label: "H-E-B Frozen Blueberries",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-blueberries/126221",
+    proteinPer100g: 0,
+    caloriePer100g: 53.09734513,
+    fiberPer100g: 2.65486726,
   },
 ];
 
@@ -1269,6 +1335,17 @@ export const veggieOptions: Option[] = [
     caloriePer100g: 88,
     fiberPer100g: null,
   },
+  // Noodles
+  {
+    value: "oFoodKoreanStyleSweetPotatoGlassNoodles",
+    label: "O'Food Korean-Style Sweet Potato Glass Noodles",
+    source:
+      "https://www.heb.com/product-detail/o-food-korean-style-sweet-potato-glass-noodles/2176980",
+    proteinPer100g: 0,
+    caloriePer100g: 350,
+    fiberPer100g: 0.84,
+  },
+  // H-E-B specific
   {
     value: "hebFiberDietarySupplementPowder",
     label: "H-E-B Fiber Dietary Supplement Powder",
@@ -1277,6 +1354,24 @@ export const veggieOptions: Option[] = [
     proteinPer100g: 0,
     caloriePer100g: 375,
     fiberPer100g: 75,
+  },
+  {
+    value: "hebFrozenMixedVegetables",
+    label: "H-E-B Frozen Mixed Vegetables",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-mixed-vegetables/126127",
+    proteinPer100g: 3.52941176,
+    caloriePer100g: 70.58823529,
+    fiberPer100g: 3.52941176,
+  },
+  {
+    value: "pictsweetSweetPotatoes",
+    label: "Pictsweet Sweet Potatoes",
+    source:
+      "https://www.heb.com/product-detail/pictsweet-sweet-potatoes/2469748",
+    proteinPer100g: 1.76470588,
+    caloriePer100g: 88.23529412,
+    fiberPer100g: 3.52941176,
   },
 ];
 
