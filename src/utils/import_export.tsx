@@ -53,12 +53,12 @@ export async function importAndExport<T extends ImportExport>(
       ) as Partial<T> & { timestamp: number };
       const firebaseData = await getData();
 
-      const { timestamp: _, ...localStorageRest } = localStorageData || {};
-      const { timestamp, ...firebaseRest } = firebaseData || {};
+      const { timestamp: t1, ...localStorageRest } = localStorageData || {};
+      const { timestamp: t2, ...firebaseRest } = firebaseData || {};
 
       data =
         !!localStorageData?.timestamp && !!firebaseData?.timestamp
-          ? localStorageData?.timestamp <= firebaseData?.timestamp
+          ? localStorageData?.timestamp >= firebaseData?.timestamp
             ? localStorageRest
             : firebaseRest
           : !!localStorageData?.timestamp
@@ -106,6 +106,7 @@ export async function importAndExport<T extends ImportExport>(
 
         // Save to localStorage
         localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(d));
+        toast.success("Saved to the current browser");
 
         // Save to firebase
         await updateData(d);
@@ -147,7 +148,6 @@ export const SaveToLocalStorageButton = ({
               userInput: data,
             }
           );
-          toast.success("Saved to the current browser");
         }}
       >
         Save to local storage (and server)

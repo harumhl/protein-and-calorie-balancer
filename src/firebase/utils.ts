@@ -3,6 +3,7 @@ import { getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 import { LOCAL_STORAGE_PREFIX } from "../utils/constants";
 import { ImportExport } from "../utils/import_export";
+import { toast } from "react-toastify";
 
 const LOCAL_STORAGE_FIREBASE_KEY = `${LOCAL_STORAGE_PREFIX}:firebase`;
 
@@ -38,8 +39,10 @@ export const addData = async (data: object) => {
   try {
     const docRef = doc(firebaseDb, "data", firebaseInfo.username);
     await setDoc(docRef, data);
+    toast.success("Saved to the the server");
     console.log("Document written with ID: ", docRef);
   } catch (e) {
+    toast.error("Failed to save to the server");
     console.error("Error adding document: ", e);
   }
 };
@@ -51,8 +54,10 @@ export const updateData = async (data: object) => {
   try {
     const docRef = doc(firebaseDb, "data", firebaseInfo.username);
     await updateDoc(docRef, data);
+    toast.success("Saved to the the server");
     console.log("Document updated with ID: ", docRef);
   } catch (e) {
+    toast.error("Failed to save to the server");
     console.error("Error updating document: ", e);
   }
 };
@@ -74,6 +79,7 @@ export const getData = async (): Promise<
       return;
     }
   } catch (e) {
+    toast.error("Failed to get data from the server");
     console.error("Error getting document: ", e);
     return;
   }
