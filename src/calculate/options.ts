@@ -1373,6 +1373,24 @@ export const veggieOptions: Option[] = [
     caloriePer100g: 88.23529412,
     fiberPer100g: 3.52941176,
   },
+  {
+    value: "hebFrozenChoppedSpinach",
+    label: "H-E-B Frozen Chopped Spinach",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-chopped-spinach-16-oz/716418",
+    proteinPer100g: 3.52941176,
+    caloriePer100g: 35.29411765,
+    fiberPer100g: 3.52941176,
+  },
+  {
+    value: "hebFrozenSlicedZucchini",
+    label: "H-E-B Frozen Sliced Zucchini",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-sliced-zucchini-16-oz/1345075",
+    proteinPer100g: 1.17647059,
+    caloriePer100g: 23.52941176,
+    fiberPer100g: 1.17647059,
+  },
 ];
 
 export const optionalRequirementOptions = [
