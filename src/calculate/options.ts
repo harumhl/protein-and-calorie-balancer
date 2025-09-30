@@ -685,6 +685,15 @@ const fruitOptions: Option[] = [
     fiberPer100g: 1.42857143,
   },
   {
+    value: "hebFrozenWholeStrawberries",
+    label: "H-E-B Frozen Whole Strawberries",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-whole-strawberries-16-oz/125408",
+    proteinPer100g: 0.71428571,
+    caloriePer100g: 28.57142857,
+    fiberPer100g: 2.14285714,
+  },
+  {
     value: "hebFrozenStrawberriesAndBananas",
     label: "H-E-B Frozen Strawberries & Bananas",
     source:
@@ -710,6 +719,33 @@ const fruitOptions: Option[] = [
     proteinPer100g: 0,
     caloriePer100g: 53.09734513,
     fiberPer100g: 2.65486726,
+  },
+  {
+    value: "hebFrozenSlicedPeaches",
+    label: "H-E-B Frozen Sliced Peaches",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-sliced-peaches-16-oz/125407",
+    proteinPer100g: 0.71428571,
+    caloriePer100g: 35.71428571,
+    fiberPer100g: 1.42857143,
+  },
+  {
+    value: "hebFrozenPineappleChunks",
+    label: "H-E-B Frozen Pineapple Chunks",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-pineapple-chunks-16-oz/443390",
+    proteinPer100g: 0.71428571,
+    caloriePer100g: 50,
+    fiberPer100g: 1.42857143,
+  },
+  {
+    value: "hebFrozenMangoChunks",
+    label: "H-E-B Frozen Mango Chunks",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-mango-chunks-16-oz/8709028",
+    proteinPer100g: 0.71428571,
+    caloriePer100g: 57.14285714,
+    fiberPer100g: 1.42857143,
   },
 ];
 
@@ -1390,6 +1426,51 @@ export const veggieOptions: Option[] = [
     proteinPer100g: 1.17647059,
     caloriePer100g: 23.52941176,
     fiberPer100g: 1.17647059,
+  },
+  {
+    value: "hebFrozenSlicedYellowSquash",
+    label: "H-E-B Frozen Sliced Yellow Squash",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-sliced-yellow-squash-16-oz/125444",
+    proteinPer100g: 1.17647059,
+    caloriePer100g: 17.64705882,
+    fiberPer100g: 1.17647059,
+  },
+  {
+    value: "hebFrozenCrinkleCutCarrots",
+    label: "H-E-B Frozen Crinkle Cut Carrots",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-crinkle-cut-carrots-16-oz/126621",
+    proteinPer100g: 1.17647059,
+    caloriePer100g: 41.17647059,
+    fiberPer100g: 2.35294118,
+  },
+  {
+    value: "hebFrozenCauliflowerFlorets",
+    label: "H-E-B Frozen Cauliflower Florets",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-cauliflower-florets-16-oz/126623",
+    proteinPer100g: 2.35294118,
+    caloriePer100g: 23.52941176,
+    fiberPer100g: 2.35294118,
+  },
+  {
+    value: "hebFrozenChoppedOnion",
+    label: "H-E-B Frozen Chopped Onion",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-chopped-onion-12-oz/848572",
+    proteinPer100g: 0,
+    caloriePer100g: 25.97402597,
+    fiberPer100g: 1.2987013,
+  },
+  {
+    value: "hebFrozenBroccoliFlorets",
+    label: "H-E-B Frozen Broccoli Florets",
+    source:
+      "https://www.heb.com/product-detail/h-e-b-frozen-broccoli-florets-40-oz/545932",
+    proteinPer100g: 3.52941176,
+    caloriePer100g: 29.41176471,
+    fiberPer100g: 3.52941176,
   },
 ];
 
